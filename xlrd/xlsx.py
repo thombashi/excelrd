@@ -25,10 +25,9 @@ DLF = sys.stdout # Default Log File
 
 ET = None
 ET_has_iterparse = False
-Element_has_iter = False
 
 def ensure_elementtree_imported(verbosity, logfile):
-    global ET, ET_has_iterparse, Element_has_iter
+    global ET, ET_has_iterparse
     if ET is not None:
         return
     if "IronPython" in sys.version:
@@ -56,7 +55,7 @@ def ensure_elementtree_imported(verbosity, logfile):
             ET_has_iterparse = True
         except NotImplementedError:
             pass
-    Element_has_iter = hasattr(ET, 'ElementTree') and hasattr(ET.ElementTree, 'iter')
+
     if verbosity:
         etree_version = repr([
             (item, getattr(ET, item))
@@ -263,7 +262,7 @@ class X12General(object):
             fprintf(self.logfile, "\n=== %s ===\n", heading)
         self.tree = ET.parse(stream)
         getmethod = self.tag2meth.get
-        for elem in self.tree.iter() if Element_has_iter else self.tree.getiterator():
+        for elem in self.tree.iter():
             if self.verbosity >= 3:
                 self.dump_elem(elem)
             meth = getmethod(elem.tag)
@@ -309,7 +308,7 @@ class X12Book(X12General):
         self.tree = ET.parse(stream)
         getmenu = self.core_props_menu.get
         props = {}
-        for elem in self.tree.iter() if Element_has_iter else self.tree.getiterator():
+        for elem in self.tree.iter():
             if self.verbosity >= 3:
                 self.dump_elem(elem)
             menu = getmenu(elem.tag)
