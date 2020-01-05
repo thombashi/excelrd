@@ -1,6 +1,17 @@
+import sys
+
 from setuptools import setup
 
 from excelrd.info import __VERSION__
+
+
+def pytest_runner_requires() -> list:
+    if set(["pytest", "test", "ptr"]).intersection(sys.argv):
+        return ["pytest-runner"]
+
+    return []
+
+TESTS_REQUIRES = ["pytest"]
 
 setup(
     name = 'excelrd',
@@ -25,6 +36,12 @@ setup(
     platforms = ["Any platform -- don't need Windows"],
     license = 'BSD',
     keywords = ['xls', 'excel', 'spreadsheet', 'workbook'],
+    python_requires=">=3.5",
+    setup_requires=pytest_runner_requires(),
+    tests_require=TESTS_REQUIRES,
+    extras_require={
+        "test": TESTS_REQUIRES,
+    },
     classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
@@ -39,5 +56,4 @@ setup(
         'Topic :: Office/Business',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    python_requires=">=3.5",
 )
