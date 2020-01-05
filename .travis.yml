@@ -11,15 +11,9 @@ matrix:
       env: TOXENV=py36
     - python: "3.5"
       env: TOXENV=py35
-    - env: TOXENV=lint
 
 install:
   - travis_retry pip install tox
 
 script:
   - tox
-
-after_success:
-  - if [ $TOXENV != lint ]; then pip install coveralls; fi
-  - if [ $TOXENV == py27 ]; then pip install requests --upgrade; fi
-  - if [ $TOXENV != lint ]; then coveralls; fi
