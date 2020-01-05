@@ -18,7 +18,7 @@ check:
 .PHONY: clean
 clean:
 	@rm -rf $(PACKAGE)-*.*.*/ \
-		build/
+		build/ \
 		dist/ \
 		pip-wheel-metadata/ \
 		.eggs/ \
