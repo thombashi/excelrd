@@ -17,6 +17,16 @@ def pytest_runner_requires() -> list:
 
 TESTS_REQUIRES = ["pytest"]
 
+
+def get_release_command_class():
+    try:
+        from releasecmd import ReleaseCommand
+    except ImportError:
+        return {}
+
+    return {"release": ReleaseCommand}
+
+
 setup(
     name = MODULE_NAME,
     version = __VERSION__,
@@ -62,4 +72,5 @@ setup(
         'Topic :: Office/Business',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
+    cmdclass=get_release_command_class(),
 )
