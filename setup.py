@@ -28,6 +28,10 @@ def get_release_command_class():
     return {"release": ReleaseCommand}
 
 
+with open("README.md") as fp:
+    long_description = fp.read()
+
+
 setup(
     name=MODULE_NAME,
     version=__VERSION__,
@@ -39,14 +43,9 @@ setup(
     packages=["excelrd"],
     scripts=["scripts/runxlrd.py",],
     description=(
-        "Library for developers to extract data from " "Microsoft Excel (tm) spreadsheet files"
+        "Library for developers to extract data from Microsoft Excel (tm) spreadsheet files"
     ),
-    long_description=(
-        "Extract data from Excel spreadsheets "
-        "(.xls and .xlsx, versions 2.0 onwards) on any platform. "
-        "Pure Python (3.5+). "
-        "Strong support for Excel dates. Unicode-aware."
-    ),
+    long_description=long_description,
     license="BSD",
     keywords=["xls", "excel", "spreadsheet", "workbook"],
     python_requires=">=3.5",
