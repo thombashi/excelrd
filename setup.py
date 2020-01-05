@@ -28,7 +28,7 @@ def get_release_command_class():
     return {"release": ReleaseCommand}
 
 
-with open("README.md") as fp:
+with open("README.rst") as fp:
     long_description = fp.read()
 
 
@@ -46,6 +46,7 @@ setup(
         "Library for developers to extract data from Microsoft Excel (tm) spreadsheet files"
     ),
     long_description=long_description,
+    long_description_content_type="text/x-rst",
     license="BSD",
     keywords=["xls", "excel", "spreadsheet", "workbook"],
     python_requires=">=3.5",
