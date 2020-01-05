@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Portions copyright © 2005-2010 Stephen John Machin, Lingfo Pty Ltd
-# This module is part of the xlrd package, which is released under a
+# This module is part of the excelrd package, which is released under a
 # BSD-style licence.
 from __future__ import print_function
 

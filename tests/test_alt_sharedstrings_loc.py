@@ -2,8 +2,8 @@
 
 from unittest import TestCase
 
-from xlrd import open_workbook
-from xlrd.book import Book
+from excelrd import open_workbook
+from excelrd.book import Book
 
 from .base import from_this_dir
 

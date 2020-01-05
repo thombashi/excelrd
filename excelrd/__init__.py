@@ -1,5 +1,5 @@
 # Copyright (c) 2005-2012 Stephen John Machin, Lingfo Pty Ltd
-# This module is part of the xlrd package, which is released under a
+# This module is part of the excelrd package, which is released under a
 # BSD-style licence.
 import os
 import pprint
@@ -77,8 +77,8 @@ def open_workbook(filename=None,
       ``BLANK`` and ``MULBLANK`` records.
       This cuts off any bottom or right "margin" of rows of empty or blank
       cells.
-      Only :meth:`~xlrd.sheet.Sheet.cell_value` and
-      :meth:`~xlrd.sheet.Sheet.cell_type` are available.
+      Only :meth:`~excelrd.sheet.Sheet.cell_value` and
+      :meth:`~excelrd.sheet.Sheet.cell_type` are available.
 
       When ``True``, formatting information will be read from the spreadsheet
       file. This provides all cells, including empty and blank cells.
@@ -96,11 +96,11 @@ def open_workbook(filename=None,
 
       The default of ``False`` means all rows are padded out with empty cells so
       that all rows have the same size as found in
-      :attr:`~xlrd.sheet.Sheet.ncols`.
+      :attr:`~excelrd.sheet.Sheet.ncols`.
 
       ``True`` means that there are no empty cells at the ends of rows.
       This can result in substantial memory savings if rows are of widely
-      varying sizes. See also the :meth:`~xlrd.sheet.Sheet.row_len` method.
+      varying sizes. See also the :meth:`~excelrd.sheet.Sheet.row_len` method.
 
 
     :param ignore_workbook_corruption:
@@ -109,7 +109,7 @@ def open_workbook(filename=None,
       When ``False`` you may face CompDocError: Workbook corruption.
       When ``True`` that exception will be ignored.
 
-    :returns: An instance of the :class:`~xlrd.book.Book` class.
+    :returns: An instance of the :class:`~excelrd.book.Book` class.
     """
 
     peeksz = 4

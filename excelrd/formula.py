@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2005-2012 Stephen John Machin, Lingfo Pty Ltd
-# This module is part of the xlrd package, which is released under a
+# This module is part of the excelrd package, which is released under a
 # BSD-style licence.
 # No part of the content of this file was derived from the works of
 # David Giffin.
@@ -2043,7 +2043,7 @@ def dump_formula(bk, data, fmlalen, bv, reldelta, blah=0, isname=0):
 
 # I'm aware of only one possibility of a sheet-relative component in
 # a reference: a 2D reference located in the "current sheet".
-# xlrd stores this internally with bounds of (0, 1, ...) and
+# excelrd stores this internally with bounds of (0, 1, ...) and
 # relative flags of (1, 1, ...). These functions display the
 # sheet component as empty, just like Excel etc.
 

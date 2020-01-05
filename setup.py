@@ -1,14 +1,14 @@
 from setuptools import setup
 
-from xlrd.info import __VERSION__
+from excelrd.info import __VERSION__
 
 setup(
-    name = 'xlrd',
+    name = 'excelrd',
     version = __VERSION__,
     author = 'John Machin',
     author_email = 'sjmachin@lexicon.net',
     url = 'http://www.python-excel.org/',
-    packages = ['xlrd'],
+    packages = ['excelrd'],
     scripts = [
         'scripts/runxlrd.py',
     ],

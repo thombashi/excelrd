@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from xlrd import open_workbook
+from excelrd import open_workbook
 
 from .base import from_this_dir
 

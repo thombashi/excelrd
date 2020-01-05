@@ -1,7 +1,7 @@
 import sys
 import unittest
 
-from xlrd import biffh
+from excelrd import biffh
 
 from io import StringIO
 

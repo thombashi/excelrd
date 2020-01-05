@@ -1,5 +1,5 @@
 # Copyright (c) 2005-2012 Stephen John Machin, Lingfo Pty Ltd
-# This module is part of the xlrd package, which is released under a
+# This module is part of the excelrd package, which is released under a
 # BSD-style licence.
 
 from __future__ import print_function
@@ -207,7 +207,7 @@ class Name(BaseObject):
     #: The result of evaluating the formula, if any.
     #: If no formula, or evaluation of the formula encountered problems,
     #: the result is ``None``. Otherwise the result is a single instance of the
-    #: :class:`~xlrd.formula.Operand` class.
+    #: :class:`~excelrd.formula.Operand` class.
     #
     result = None
 
@@ -216,9 +216,9 @@ class Name(BaseObject):
         This is a convenience method for the frequent use case where the name
         refers to a single cell.
 
-        :returns: An instance of the :class:`~xlrd.sheet.Cell` class.
+        :returns: An instance of the :class:`~excelrd.sheet.Cell` class.
 
-        :raises xlrd.biffh.XLRDError:
+        :raises excelrd.biffh.XLRDError:
           The name is not a constant absolute reference
           to a single cell.
         """
@@ -255,7 +255,7 @@ class Name(BaseObject):
 
         :returns: a tuple ``(sheet_object, rowxlo, rowxhi, colxlo, colxhi)``.
 
-        :raises xlrd.biffh.XLRDError:
+        :raises excelrd.biffh.XLRDError:
            The name is not a constant absolute reference
            to a single area in a single sheet.
         """
@@ -292,7 +292,7 @@ class Book(BaseObject):
     .. warning::
 
       You should not instantiate this class yourself. You use the :class:`Book`
-      object that was returned when you called :func:`~xlrd.open_workbook`.
+      object that was returned when you called :func:`~excelrd.open_workbook`.
     """
 
     #: The number of worksheets present in the workbook file.
@@ -351,19 +351,19 @@ class Book(BaseObject):
     #: save the file.
     user_name = UNICODE_LITERAL('')
 
-    #: A list of :class:`~xlrd.formatting.Font` class instances,
+    #: A list of :class:`~excelrd.formatting.Font` class instances,
     #: each corresponding to a FONT record.
     #:
     #: .. versionadded:: 0.6.1
     font_list = []
 
-    #: A list of :class:`~xlrd.formatting.XF` class instances,
+    #: A list of :class:`~excelrd.formatting.XF` class instances,
     #: each corresponding to an ``XF`` record.
     #:
     #: .. versionadded:: 0.6.1
     xf_list = []
 
-    #: A list of :class:`~xlrd.formatting.Format` objects, each corresponding to
+    #: A list of :class:`~excelrd.formatting.Format` objects, each corresponding to
     #: a ``FORMAT`` record, in the order that they appear in the input file.
     #: It does *not* contain builtin formats.
     #:
@@ -377,8 +377,8 @@ class Book(BaseObject):
     format_list = []
 
     ##
-    #: The mapping from :attr:`~xlrd.formatting.XF.format_key` to
-    #: :class:`~xlrd.formatting.Format` object.
+    #: The mapping from :attr:`~excelrd.formatting.XF.format_key` to
+    #: :class:`~excelrd.formatting.Format` object.
     #:
     #: .. versionadded:: 0.6.1
     format_map = {}
@@ -463,7 +463,7 @@ class Book(BaseObject):
     def sheet_by_index(self, sheetx):
         """
         :param sheetx: Sheet index in ``range(nsheets)``
-        :returns: A :class:`~xlrd.sheet.Sheet`.
+        :returns: A :class:`~excelrd.sheet.Sheet`.
         """
         return self._sheet_list[sheetx] or self.get_sheet(sheetx)
 
@@ -478,7 +478,7 @@ class Book(BaseObject):
     def sheet_by_name(self, sheet_name):
         """
         :param sheet_name: Name of the sheet required.
-        :returns: A :class:`~xlrd.sheet.Sheet`.
+        :returns: A :class:`~excelrd.sheet.Sheet`.
         """
         try:
             sheetx = self._sheet_names.index(sheet_name)
@@ -490,7 +490,7 @@ class Book(BaseObject):
         """
         Allow indexing with sheet name or index.
         :param item: Name or index of sheet enquired upon
-        :return: :class:`~xlrd.sheet.Sheet`.
+        :return: :class:`~excelrd.sheet.Sheet`.
         """
         if isinstance(item, int):
             return self.sheet_by_index(item)
@@ -544,7 +544,7 @@ class Book(BaseObject):
         (:class:`mmap.mmap` object) when you have finished loading sheets in
         ``on_demand`` mode, but still require the :class:`Book` object to
         examine the loaded sheets. It is also called automatically (a) when
-        :func:`~xlrd.open_workbook`
+        :func:`~excelrd.open_workbook`
         raises an exception and (b) if you are using a ``with`` statement, when
         the ``with`` block is exited. Calling this method multiple times on the
         same object has no ill effect.

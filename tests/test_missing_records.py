@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from xlrd import open_workbook
-from xlrd.biffh import XL_CELL_TEXT
+from excelrd import open_workbook
+from excelrd.biffh import XL_CELL_TEXT
 
 from .base import from_this_dir
 
