@@ -21,6 +21,7 @@
 excelrd
 ==================
 ``excelrd`` is a modified version of `xlrd <http://www.python-excel.org/>`__ to work for the latest Python.
+``xlrd`` will not work at Python 3.9 environments.
 
 **Purpose**: Provide a library for developers to use to extract data from Microsoft Excel (tm) spreadsheet files. It is not an end-user tool.
 
@@ -46,6 +47,8 @@ if present in the file:
 
 Quick start
 ==================
+Print all of the cell values in a specific sheet:
+
 :Sample Code:
     .. code:: python
 
