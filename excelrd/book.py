@@ -2,7 +2,7 @@
 # This module is part of the excelrd package, which is released under a
 # BSD-style licence.
 
-from __future__ import print_function
+
 
 import gc
 import sys
@@ -12,11 +12,7 @@ from .biffh import *
 from .formula import *
 from .timemachine import *
 
-try:
-    from time import perf_counter
-except ImportError:
-    # Python 2.7
-    from time import clock as perf_counter
+from time import perf_counter
 
 import struct; unpack = struct.unpack
 
@@ -38,7 +34,7 @@ USE_MMAP = MMAP_AVAILABLE
 
 MY_EOF = 0xF00BAAA # not a 16-bit number
 
-SUPBOOK_UNK, SUPBOOK_INTERNAL, SUPBOOK_EXTERNAL, SUPBOOK_ADDIN, SUPBOOK_DDEOLE = range(5)
+SUPBOOK_UNK, SUPBOOK_INTERNAL, SUPBOOK_EXTERNAL, SUPBOOK_ADDIN, SUPBOOK_DDEOLE = list(range(5))
 
 SUPPORTED_VERSIONS = (80, 70, 50, 45, 40, 30, 21, 20)
 
@@ -455,7 +451,7 @@ class Book(BaseObject):
 
         All sheets not already loaded will be loaded.
         """
-        for sheetx in xrange(self.nsheets):
+        for sheetx in range(self.nsheets):
             if not self._sheet_list[sheetx]:
                 self.get_sheet(sheetx)
         return self._sheet_list[:]
@@ -742,7 +738,7 @@ class Book(BaseObject):
     def get_sheets(self):
         # DEBUG = 0
         if DEBUG: print("GET_SHEETS:", self._sheet_names, self._sh_abs_posn, file=self.logfile)
-        for sheetno in xrange(len(self._sheet_names)):
+        for sheetno in range(len(self._sheet_names)):
             if DEBUG: print("GET_SHEETS: sheetno =", sheetno, self._sheet_names, self._sh_abs_posn, file=self.logfile)
             self.get_sheet(sheetno)
 
@@ -844,7 +840,7 @@ class Book(BaseObject):
             # If we don't have a codec that can decode ASCII into Unicode,
             # we're well & truly stuffed -- let the punter know ASAP.
             try:
-                unicode(b'trial', self.encoding)
+                str(b'trial', self.encoding)
             except BaseException as e:
                 fprintf(self.logfile,
                     "ERROR *** codepage %r -> encoding %r -> %s: %s\n",
@@ -913,7 +909,7 @@ class Book(BaseObject):
                     raise XLRDError("Missing CONTINUE after EXTERNSHEET record")
                 data += data2
             pos = 2
-            for k in xrange(num_refs):
+            for k in range(num_refs):
                 info = unpack("<HHH", data[pos:pos+6])
                 ref_recordx, ref_first_sheetx, ref_last_sheetx = info
                 self._externsheet_info.append(info)
@@ -937,7 +933,7 @@ class Book(BaseObject):
                 }.get(ty, "Not encoded")
                 print("   %3d chars, type is %d (%s)" % (nc, ty, msg), file=self.logfile)
             if ty == 3:
-                sheet_name = unicode(data[2:nc+2], self.encoding)
+                sheet_name = str(data[2:nc+2], self.encoding)
                 self._extnsht_name_from_num[self._extnsht_count] = sheet_name
                 if blah2: print(self._extnsht_name_from_num, file=self.logfile)
             if not (1 <= ty <= 4):
@@ -1425,7 +1421,7 @@ def unpack_SST_table(datatab, nstrings):
     local_min = min
     local_BYTES_ORD = BYTES_ORD
     latin_1 = "latin_1"
-    for _unused_i in xrange(nstrings):
+    for _unused_i in range(nstrings):
         nchars = local_unpack('<H', data[pos:pos+2])[0]
         pos += 2
         options = local_BYTES_ORD(data[pos])
@@ -1448,7 +1444,7 @@ def unpack_SST_table(datatab, nstrings):
                 rawstrg = data[pos:pos+2*charsavail]
                 # if DEBUG: print "SST U16: nchars=%d pos=%d rawstrg=%r" % (nchars, pos, rawstrg)
                 try:
-                    accstrg += unicode(rawstrg, "utf_16_le")
+                    accstrg += str(rawstrg, "utf_16_le")
                 except:
                     # print "SST U16: nchars=%d pos=%d rawstrg=%r" % (nchars, pos, rawstrg)
                     # Probable cause: dodgy data e.g. unfinished surrogate pair.
@@ -1462,7 +1458,7 @@ def unpack_SST_table(datatab, nstrings):
                 charsavail = local_min(datalen - pos, charsneed)
                 rawstrg = data[pos:pos+charsavail]
                 # if DEBUG: print "SST CMPRSD: nchars=%d pos=%d rawstrg=%r" % (nchars, pos, rawstrg)
-                accstrg += unicode(rawstrg, latin_1)
+                accstrg += str(rawstrg, latin_1)
                 pos += charsavail
             charsgot += charsavail
             if charsgot == nchars:
@@ -1475,7 +1471,7 @@ def unpack_SST_table(datatab, nstrings):
 
         if rtcount:
             runs = []
-            for runindex in xrange(rtcount):
+            for runindex in range(rtcount):
                 if pos == datalen:
                     pos = 0
                     datainx += 1

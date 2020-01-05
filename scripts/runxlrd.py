@@ -3,7 +3,7 @@
 # This script is part of the excelrd package, which is released under a
 # BSD-style licence.
 
-from __future__ import print_function
+
 
 cmd_doc = """
 Commands:
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     import traceback
     import gc
 
-    from excelrd.timemachine import xrange, REPR
+    from excelrd.timemachine import REPR
 
 
     class LogHandler(object):
@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
     def show_row(bk, sh, rowx, colrange, printit):
         if bk.ragged_rows:
-            colrange = range(sh.row_len(rowx))
+            colrange = list(range(sh.row_len(rowx)))
         if not colrange: return
         if printit: print()
         if bk.formatting_info:
@@ -121,7 +121,7 @@ if __name__ == "__main__":
 
     def show_fonts(bk):
         print("Fonts:")
-        for x in xrange(len(bk.font_list)):
+        for x in range(len(bk.font_list)):
             font = bk.font_list[x]
             font.dump(header='== Index %d ==' % x, indent=4)
 
@@ -145,8 +145,8 @@ if __name__ == "__main__":
         for rlo, rhi, clo, chi in labs:
             print("%s label range %s:%s contains:"
                 % (title, excelrd.cellname(rlo, clo), excelrd.cellname(rhi-1, chi-1)))
-            for rx in xrange(rlo, rhi):
-                for cx in xrange(clo, chi):
+            for rx in range(rlo, rhi):
+                for cx in range(clo, chi):
                     print("    %s: %r" % (excelrd.cellname(rx, cx), sh.cell_value(rx, cx)))
 
     def show_labels(bk):
@@ -181,24 +181,24 @@ if __name__ == "__main__":
                 shx = bk.sheet_by_name(options.onesheet).number
             shxrange = [shx]
         else:
-            shxrange = range(bk.nsheets)
+            shxrange = list(range(bk.nsheets))
         # print("shxrange", list(shxrange))
         for shx in shxrange:
             sh = bk.sheet_by_index(shx)
             nrows, ncols = sh.nrows, sh.ncols
-            colrange = range(ncols)
+            colrange = list(range(ncols))
             anshow = min(nshow, nrows)
             print("sheet %d: name = %s; nrows = %d; ncols = %d" %
                 (shx, REPR(sh.name), sh.nrows, sh.ncols))
             if nrows and ncols:
                 # Beat the bounds
-                for rowx in xrange(nrows):
+                for rowx in range(nrows):
                     nc = sh.row_len(rowx)
                     if nc:
                         sh.row_types(rowx)[nc-1]
                         sh.row_values(rowx)[nc-1]
                         sh.cell(rowx, nc-1)
-            for rowx in xrange(anshow-1):
+            for rowx in range(anshow-1):
                 if not printit and rowx % 10000 == 1 and rowx > 1:
                     print("done %d rows" % (rowx-1,))
                 show_row(bk, sh, rowx, colrange, printit)
@@ -216,8 +216,8 @@ if __name__ == "__main__":
                 (shx, sh.name, sh.nrows, sh.ncols))
             # Access all xfindexes to force gathering stats
             type_stats = [0, 0, 0, 0, 0, 0, 0]
-            for rowx in xrange(nrows):
-                for colx in xrange(sh.row_len(rowx)):
+            for rowx in range(nrows):
+                for colx in range(sh.row_len(rowx)):
                     xfx = sh.cell_xf_index(rowx, colx)
                     assert xfx >= 0
                     cty = sh.cell_type(rowx, colx)

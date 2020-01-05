@@ -8,7 +8,7 @@
 Module for parsing/evaluating Microsoft Excel formulas.
 """
 
-from __future__ import print_function
+
 
 import copy
 import operator as opr

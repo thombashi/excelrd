@@ -2,7 +2,7 @@
 # Portions copyright © 2005-2010 Stephen John Machin, Lingfo Pty Ltd
 # This module is part of the excelrd package, which is released under a
 # BSD-style licence.
-from __future__ import print_function
+
 
 import sys
 from struct import unpack
@@ -247,7 +247,7 @@ def upkbitsL(tgt_obj, src, manifest, local_setattr=setattr, local_int=int):
 def unpack_string(data, pos, encoding, lenlen=1):
     nchars = unpack('<' + 'BH'[lenlen-1], data[pos:pos+lenlen])[0]
     pos += lenlen
-    return unicode(data[pos:pos+nchars], encoding)
+    return str(data[pos:pos+nchars], encoding)
 
 def unpack_string_update_pos(data, pos, encoding, lenlen=1, known_len=None):
     if known_len is not None:
@@ -257,7 +257,7 @@ def unpack_string_update_pos(data, pos, encoding, lenlen=1, known_len=None):
         nchars = unpack('<' + 'BH'[lenlen-1], data[pos:pos+lenlen])[0]
         pos += lenlen
     newpos = pos + nchars
-    return (unicode(data[pos:newpos], encoding), newpos)
+    return (str(data[pos:newpos], encoding), newpos)
 
 def unpack_unicode(data, pos, lenlen=2):
     "Return unicode_strg"
@@ -281,7 +281,7 @@ def unpack_unicode(data, pos, lenlen=2):
         # Uncompressed UTF-16-LE
         rawstrg = data[pos:pos+2*nchars]
         # if DEBUG: print "nchars=%d pos=%d rawstrg=%r" % (nchars, pos, rawstrg)
-        strg = unicode(rawstrg, 'utf_16_le')
+        strg = str(rawstrg, 'utf_16_le')
         # pos += 2*nchars
     else:
         # Note: this is COMPRESSED (not ASCII!) encoding!!!
@@ -289,7 +289,7 @@ def unpack_unicode(data, pos, lenlen=2):
         # if the local codepage was cp1252 -- however this would rapidly go pear-shaped
         # for other codepages so we grit our Anglocentric teeth and return Unicode :-)
 
-        strg = unicode(data[pos:pos+nchars], "latin_1")
+        strg = str(data[pos:pos+nchars], "latin_1")
         # pos += nchars
     # if richtext:
     #     pos += 4 * rt
@@ -321,11 +321,11 @@ def unpack_unicode_update_pos(data, pos, lenlen=2, known_len=None):
         pos += 4
     if options & 0x01:
         # Uncompressed UTF-16-LE
-        strg = unicode(data[pos:pos+2*nchars], 'utf_16_le')
+        strg = str(data[pos:pos+2*nchars], 'utf_16_le')
         pos += 2*nchars
     else:
         # Note: this is COMPRESSED (not ASCII!) encoding!!!
-        strg = unicode(data[pos:pos+nchars], "latin_1")
+        strg = str(data[pos:pos+nchars], "latin_1")
         pos += nchars
     if richtext:
         pos += 4 * rt
@@ -345,7 +345,7 @@ def unpack_cell_range_address_list_update_pos(output_list, data, pos, biff_versi
             fmt = "<HHBB"
         else:
             fmt = "<HHHH"
-        for _unused in xrange(n):
+        for _unused in range(n):
             ra, rb, ca, cb = unpack(fmt, data[pos:pos+addr_size])
             output_list.append((ra, rb+1, ca, cb+1))
             pos += addr_size

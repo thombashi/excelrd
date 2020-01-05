@@ -3,7 +3,7 @@
 # This module is part of the excelrd package, which is released under a BSD-style licence.
 ##
 
-from __future__ import print_function, unicode_literals
+
 
 import re
 import sys
@@ -76,7 +76,7 @@ def augment_keys(adict, uri):
         adict[uri + x] = adict[x]
 
 _UPPERCASE_1_REL_INDEX = {} # Used in fast conversion of column names (e.g. "XFD") to indices (16383)
-for _x in xrange(26):
+for _x in range(26):
     _UPPERCASE_1_REL_INDEX["ABCDEFGHIJKLMNOPQRSTUVWXYZ"[_x]] = _x + 1
 for _x in "123456789":
     _UPPERCASE_1_REL_INDEX[_x] = 0
@@ -113,7 +113,7 @@ def cell_name_to_rowx_colx(cell_name, letter_value=_UPPERCASE_1_REL_INDEX,
     return rowx, colx
 
 error_code_from_text = {}
-for _code, _text in error_text_from_code.items():
+for _code, _text in list(error_text_from_code.items()):
     error_code_from_text[_text] = _code
 
 # === X12 === Excel 2007 .xlsx ===============================================
@@ -134,7 +134,7 @@ IS_TAG = U_SSML12 + 'is' # cell child: inline string
 
 def unescape(s,
              subber=re.compile(r'_x[0-9A-Fa-f]{4,4}_', re.UNICODE).sub,
-             repl=lambda mobj: unichr(int(mobj.group(0)[2:6], 16))):
+             repl=lambda mobj: chr(int(mobj.group(0)[2:6], 16))):
     if "_" in s:
         return subber(repl, s)
     return s
@@ -231,7 +231,7 @@ def make_name_access_maps(bk):
     name_and_scope_map = {} # (name.lower(), scope): Name_object
     name_map = {}           # name.lower() : list of Name_objects (sorted in scope order)
     num_names = len(bk.name_obj_list)
-    for namex in xrange(num_names):
+    for namex in range(num_names):
         nobj = bk.name_obj_list[namex]
         name_lcase = nobj.name.lower()
         key = (name_lcase, nobj.scope)
