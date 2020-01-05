@@ -1,3 +1,20 @@
+[tool.black]
+line-length = 100
+exclude = '''
+/(
+      \.eggs
+    | \.git
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+)/
+| docs/conf.py
+'''
+
 [tool.coverage.run]
 source = ['excelrd']
 branch = true

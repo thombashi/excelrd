@@ -7,9 +7,8 @@ from .base import from_this_dir
 
 
 class TestMissingRecords(TestCase):
-
     def setUp(self):
-        path = from_this_dir('biff4_no_format_no_window2.xls')
+        path = from_this_dir("biff4_no_format_no_window2.xls")
         self.book = open_workbook(path)
         self.sheet = self.book.sheet_by_index(0)
 

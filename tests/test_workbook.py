@@ -15,11 +15,10 @@ NCOLS = 13
 
 
 class TestWorkbook(TestCase):
-    sheetnames = ['PROFILEDEF', 'AXISDEF', 'TRAVERSALCHAINAGE',
-                  'AXISDATUMLEVELS', 'PROFILELEVELS']
+    sheetnames = ["PROFILEDEF", "AXISDEF", "TRAVERSALCHAINAGE", "AXISDATUMLEVELS", "PROFILELEVELS"]
 
     def setUp(self):
-        self.book = open_workbook(from_this_dir('profiles.xls'))
+        self.book = open_workbook(from_this_dir("profiles.xls"))
 
     def test_open_workbook(self):
         self.assertTrue(isinstance(self.book, Book))

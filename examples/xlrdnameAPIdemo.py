@@ -25,12 +25,13 @@ def scope_as_string(book, scope):
         return "Macro/VBA"
     return "Unknown scope value (%r)" % REPR(scope)
 
+
 def do_scope_query(book, scope_strg, show_contents=0, f=sys.stdout):
     try:
         qscope = int(scope_strg)
     except ValueError:
         if scope_strg == "*":
-            qscope = None # means "all'
+            qscope = None  # means "all'
         else:
             # so assume it's a sheet name ...
             qscope = book.sheet_names().index(scope_strg)
@@ -39,6 +40,7 @@ def do_scope_query(book, scope_strg, show_contents=0, f=sys.stdout):
         if qscope is None or nobj.scope == qscope:
             show_name_object(book, nobj, show_contents, f)
 
+
 def show_name_details(book, name, show_contents=0, f=sys.stdout):
     """
     book -- Book object obtained from excelrd.open_workbook().
@@ -46,13 +48,14 @@ def show_name_details(book, name, show_contents=0, f=sys.stdout):
     show_contents -- 0: Don't; 1: Non-empty cells only; 2: All cells
     f -- Open output file handle.
     """
-    name_lcase = name.lower() # Excel names are case-insensitive.
+    name_lcase = name.lower()  # Excel names are case-insensitive.
     nobj_list = book.name_map.get(name_lcase)
     if not nobj_list:
         print("%r: unknown name" % name, file=f)
         return
     for nobj in nobj_list:
         show_name_object(book, nobj, show_contents, f)
+
 
 def show_name_details_in_scope(book, name, scope_strg, show_contents=0, f=sys.stdout):
     try:
@@ -61,7 +64,7 @@ def show_name_details_in_scope(book, name, scope_strg, show_contents=0, f=sys.st
         # so assume it's a sheet name ...
         scope = book.sheet_names().index(scope_strg)
         print("%r => %d" % (scope_strg, scope), file=f)
-    name_lcase = name.lower() # Excel names are case-insensitive.
+    name_lcase = name.lower()  # Excel names are case-insensitive.
     while 1:
         nobj = book.name_and_scope_map.get((name_lcase, scope))
         if nobj:
@@ -69,9 +72,10 @@ def show_name_details_in_scope(book, name, scope_strg, show_contents=0, f=sys.st
         print("Name %s not found in scope %d" % (REPR(name), scope), file=f)
         if scope == -1:
             return
-        scope = -1 # Try again with global scope
+        scope = -1  # Try again with global scope
     print("Name %s found in scope %d" % (REPR(name), scope), file=f)
     show_name_object(book, nobj, show_contents, f)
+
 
 def showable_cell_value(celltype, cellvalue, datemode):
     if celltype == excelrd.XL_CELL_DATE:
@@ -81,14 +85,19 @@ def showable_cell_value(celltype, cellvalue, datemode):
             showval = "%s:%s" % (type(e).__name__, e)
     elif celltype == excelrd.XL_CELL_ERROR:
         showval = excelrd.error_text_from_code.get(
-            cellvalue, '<Unknown error code 0x%02x>' % cellvalue)
+            cellvalue, "<Unknown error code 0x%02x>" % cellvalue
+        )
     else:
         showval = cellvalue
     return showval
 
+
 def show_name_object(book, nobj, show_contents=0, f=sys.stdout):
-    print("\nName: %s, scope: %s (%s)"
-        % (REPR(nobj.name), REPR(nobj.scope), scope_as_string(book, nobj.scope)), file=f)
+    print(
+        "\nName: %s, scope: %s (%s)"
+        % (REPR(nobj.name), REPR(nobj.scope), scope_as_string(book, nobj.scope)),
+        file=f,
+    )
     res = nobj.result
     print("Formula eval result: %s" % REPR(res), file=f)
     if res is None:
@@ -103,12 +112,20 @@ def show_name_object(book, nobj, show_contents=0, f=sys.stdout):
         # A list of Ref3D objects representing *relative* ranges
         for i in range(len(value)):
             ref3d = value[i]
-            print("Range %d: %s ==> %s"% (i, REPR(ref3d.coords), REPR(excelrd.rangename3drel(book, ref3d))), file=f)
+            print(
+                "Range %d: %s ==> %s"
+                % (i, REPR(ref3d.coords), REPR(excelrd.rangename3drel(book, ref3d))),
+                file=f,
+            )
     elif kind == excelrd.oREF:
         # A list of Ref3D objects
         for i in range(len(value)):
             ref3d = value[i]
-            print("Range %d: %s ==> %s"% (i, REPR(ref3d.coords), REPR(excelrd.rangename3d(book, ref3d))), file=f)
+            print(
+                "Range %d: %s ==> %s"
+                % (i, REPR(ref3d.coords), REPR(excelrd.rangename3d(book, ref3d))),
+                file=f,
+            )
             if not show_contents:
                 continue
             datemode = book.datemode
@@ -124,10 +141,15 @@ def show_name_object(book, nobj, show_contents=0, f=sys.stdout):
                             continue
                         cval = sh.cell_value(rowx, colx)
                         sval = showable_cell_value(cty, cval, datemode)
-                        print("      (%3d,%3d) %-5s: %s"
-                            % (rowx, colx, excelrd.cellname(rowx, colx), REPR(sval)), file=f)
+                        print(
+                            "      (%3d,%3d) %-5s: %s"
+                            % (rowx, colx, excelrd.cellname(rowx, colx), REPR(sval)),
+                            file=f,
+                        )
+
 
 if __name__ == "__main__":
+
     def usage():
         text = """
 usage: xlrdnameAIPdemo.py glob_pattern name scope show_contents
@@ -158,9 +180,9 @@ Examples (script name and glob_pattern arg omitted for brevity)
     if len(sys.argv) != 5:
         usage()
         sys.exit(0)
-    arg_pattern = sys.argv[1] # glob pattern e.g. "foo*.xls"
-    arg_name = sys.argv[2]    # see below
-    arg_scope = sys.argv[3]   # see below
+    arg_pattern = sys.argv[1]  # glob pattern e.g. "foo*.xls"
+    arg_name = sys.argv[2]  # see below
+    arg_scope = sys.argv[3]  # see below
     # 0: no show,
     # 1: only non-empty cells,
     # 2: all cells

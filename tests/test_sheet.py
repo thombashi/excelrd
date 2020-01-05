@@ -17,27 +17,26 @@ COL_ERR = NCOLS + 10
 
 class TestSheet(TestCase):
 
-    sheetnames = ['PROFILEDEF', 'AXISDEF', 'TRAVERSALCHAINAGE',
-                  'AXISDATUMLEVELS', 'PROFILELEVELS']
+    sheetnames = ["PROFILEDEF", "AXISDEF", "TRAVERSALCHAINAGE", "AXISDATUMLEVELS", "PROFILELEVELS"]
 
     def setUp(self):
-        self.book = excelrd.open_workbook(from_this_dir('profiles.xls'), formatting_info=True)
+        self.book = excelrd.open_workbook(from_this_dir("profiles.xls"), formatting_info=True)
 
     def check_sheet_function(self, function):
         self.assertTrue(function(0, 0))
-        self.assertTrue(function(NROWS-1, NCOLS-1))
+        self.assertTrue(function(NROWS - 1, NCOLS - 1))
 
     def check_sheet_function_index_error(self, function):
         self.assertRaises(IndexError, function, ROW_ERR, 0)
         self.assertRaises(IndexError, function, 0, COL_ERR)
 
     def check_col_slice(self, col_function):
-        _slice = col_function(0, 2, NROWS-2)
-        self.assertEqual(len(_slice), NROWS-4)
+        _slice = col_function(0, 2, NROWS - 2)
+        self.assertEqual(len(_slice), NROWS - 4)
 
     def check_row_slice(self, row_function):
-        _slice = row_function(0, 2, NCOLS-2)
-        self.assertEqual(len(_slice), NCOLS-4)
+        _slice = row_function(0, 2, NCOLS - 2)
+        self.assertEqual(len(_slice), NCOLS - 4)
 
     def test_nrows(self):
         sheet = self.book.sheet_by_index(SHEETINDEX)
@@ -50,7 +49,7 @@ class TestSheet(TestCase):
     def test_cell(self):
         sheet = self.book.sheet_by_index(SHEETINDEX)
         self.assertNotEqual(excelrd.empty_cell, sheet.cell(0, 0))
-        self.assertNotEqual(excelrd.empty_cell, sheet.cell(NROWS-1, NCOLS-1))
+        self.assertNotEqual(excelrd.empty_cell, sheet.cell(NROWS - 1, NCOLS - 1))
 
     def test_cell_error(self):
         sheet = self.book.sheet_by_index(SHEETINDEX)
@@ -98,7 +97,7 @@ class TestSheet(TestCase):
     def test_getitem_tuple(self):
         sheet = self.book.sheet_by_index(SHEETINDEX)
         self.assertNotEqual(excelrd.empty_cell, sheet[0, 0])
-        self.assertNotEqual(excelrd.empty_cell, sheet[NROWS-1, NCOLS-1])
+        self.assertNotEqual(excelrd.empty_cell, sheet[NROWS - 1, NCOLS - 1])
 
     def test_getitem_failure(self):
         sheet = self.book.sheet_by_index(SHEETINDEX)
@@ -148,9 +147,8 @@ class TestSheet(TestCase):
 
 
 class TestSheetRagged(TestCase):
-
     def test_read_ragged(self):
-        book = excelrd.open_workbook(from_this_dir('ragged.xls'), ragged_rows=True)
+        book = excelrd.open_workbook(from_this_dir("ragged.xls"), ragged_rows=True)
         sheet = book.sheet_by_index(0)
         self.assertEqual(sheet.row_len(0), 3)
         self.assertEqual(sheet.row_len(1), 2)
@@ -160,9 +158,8 @@ class TestSheetRagged(TestCase):
 
 
 class TestMergedCells(TestCase):
-
     def test_tidy_dimensions(self):
-        book = excelrd.open_workbook(from_this_dir('merged_cells.xlsx'))
+        book = excelrd.open_workbook(from_this_dir("merged_cells.xlsx"))
         for sheet in book.sheets():
             for rowx in range(sheet.nrows):
                 self.assertEqual(sheet.row_len(rowx), sheet.ncols)

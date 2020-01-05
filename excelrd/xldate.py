@@ -161,11 +161,16 @@ def xldate_as_datetime(xldate, datemode):
 
 # === conversions from date/time to xl numbers
 
+
 def _leap(y):
-    if y % 4: return 0
-    if y % 100: return 1
-    if y % 400: return 0
+    if y % 4:
+        return 0
+    if y % 100:
+        return 1
+    if y % 400:
+        return 0
     return 1
+
 
 _days_in_month = (None, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
@@ -196,8 +201,7 @@ def xldate_from_date_tuple(date_tuple, datemode):
         raise XLDateBadTuple("Invalid year: %r" % ((year, month, day),))
     if not (1 <= month <= 12):
         raise XLDateBadTuple("Invalid month: %r" % ((year, month, day),))
-    if  (day < 1 or
-         (day > _days_in_month[month] and not(day == 29 and month == 2 and _leap(year)))):
+    if day < 1 or (day > _days_in_month[month] and not (day == 29 and month == 2 and _leap(year))):
         raise XLDateBadTuple("Invalid day: %r" % ((year, month, day),))
 
     Yp = year + 4716
@@ -207,8 +211,7 @@ def xldate_from_date_tuple(date_tuple, datemode):
         Mp = M + 9
     else:
         Mp = M - 3
-    jdn = (1461 * Yp // 4) + ((979 * Mp + 16) // 32) + \
-        day - 1364 - (((Yp + 184) // 100) * 3 // 4)
+    jdn = (1461 * Yp // 4) + ((979 * Mp + 16) // 32) + day - 1364 - (((Yp + 184) // 100) * 3 // 4)
     xldays = jdn - _JDN_delta[datemode]
     if xldays <= 0:
         raise XLDateBadTuple("Invalid (year, month, day): %r" % ((year, month, day),))
@@ -242,7 +245,6 @@ def xldate_from_datetime_tuple(datetime_tuple, datemode):
     :param datetime_tuple: ``(year, month, day, hour, minute, second)``
     :param datemode: 0: 1900-based, 1: 1904-based.
     """
-    return (
-        xldate_from_date_tuple(datetime_tuple[:3], datemode) +
-        xldate_from_time_tuple(datetime_tuple[3:])
+    return xldate_from_date_tuple(datetime_tuple[:3], datemode) + xldate_from_time_tuple(
+        datetime_tuple[3:]
     )

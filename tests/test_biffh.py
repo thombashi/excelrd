@@ -14,5 +14,6 @@ class TestHexDump(unittest.TestCase):
         assert "61 62 63 00 65 01" in s, s
         assert "abc~e?" in s, s
 
-if __name__=='__main__':
+
+if __name__ == "__main__":
     unittest.main()
