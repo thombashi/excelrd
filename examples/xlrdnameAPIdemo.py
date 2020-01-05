@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 
 ##
 # Module/script example of the excelrd API for extracting information
@@ -7,7 +7,7 @@
 # <p>Copyright © 2006 Stephen John Machin, Lingfo Pty Ltd</p>
 # <p>This module is part of the excelrd package, which is released under a BSD-style licence.</p>
 ##
-from __future__ import print_function
+
 
 import glob
 import sys
