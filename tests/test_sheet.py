@@ -4,7 +4,6 @@ import types
 from unittest import TestCase
 
 import xlrd
-from xlrd.timemachine import xrange
 
 from .base import from_this_dir
 
@@ -165,5 +164,5 @@ class TestMergedCells(TestCase):
     def test_tidy_dimensions(self):
         book = xlrd.open_workbook(from_this_dir('merged_cells.xlsx'))
         for sheet in book.sheets():
-            for rowx in xrange(sheet.nrows):
+            for rowx in range(sheet.nrows):
                 self.assertEqual(sheet.row_len(rowx), sheet.ncols)
