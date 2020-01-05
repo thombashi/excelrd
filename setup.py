@@ -5,6 +5,10 @@ from setuptools import setup
 from excelrd.info import __VERSION__
 
 
+MODULE_NAME = "excelrd"
+REPOSITORY_URL = "https://github.com/thombashi/{:s}".format(MODULE_NAME)
+
+
 def pytest_runner_requires() -> list:
     if set(["pytest", "test", "ptr"]).intersection(sys.argv):
         return ["pytest-runner"]
@@ -14,11 +18,13 @@ def pytest_runner_requires() -> list:
 TESTS_REQUIRES = ["pytest"]
 
 setup(
-    name = 'excelrd',
+    name = MODULE_NAME,
     version = __VERSION__,
     author = 'John Machin',
     author_email = 'sjmachin@lexicon.net',
-    url = 'http://www.python-excel.org/',
+    maintainer="Tsuyoshi Hombashi",
+    maintainer_email="tsuyoshi.hombashi@gmail.com",
+    url = 'https://github.com/thombashi/excelrd',
     packages = ['excelrd'],
     scripts = [
         'scripts/runxlrd.py',
@@ -30,10 +36,9 @@ setup(
     long_description = (
         "Extract data from Excel spreadsheets "
         "(.xls and .xlsx, versions 2.0 onwards) on any platform. "
-        "Pure Python (2.7, 3.4+). "
+        "Pure Python (3.5+). "
         "Strong support for Excel dates. Unicode-aware."
     ),
-    platforms = ["Any platform -- don't need Windows"],
     license = 'BSD',
     keywords = ['xls', 'excel', 'spreadsheet', 'workbook'],
     python_requires=">=3.5",
