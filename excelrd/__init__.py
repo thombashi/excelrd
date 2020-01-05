@@ -26,6 +26,7 @@ from .sheet import empty_cell
 from .xldate import XLDateError, xldate_as_datetime, xldate_as_tuple
 from .xlsx import X12Book
 
+
 if sys.version.startswith("IronPython"):
     # print >> sys.stderr, "...importing encodings"
     import encodings

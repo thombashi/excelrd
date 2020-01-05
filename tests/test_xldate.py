@@ -9,6 +9,7 @@ import unittest
 
 from excelrd import xldate
 
+
 DATEMODE = 0  # 1900-based
 
 

@@ -8,6 +8,7 @@ import excelrd
 
 from .base import from_this_dir
 
+
 if sys.version_info[0] >= 3:
 
     def u(s):

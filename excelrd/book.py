@@ -4,16 +4,15 @@
 
 
 import gc
+import struct
 import sys
+from time import perf_counter
 
 from . import compdoc, formatting, sheet
 from .biffh import *
 from .formula import *
 from .timemachine import *
 
-from time import perf_counter
-
-import struct
 
 unpack = struct.unpack
 

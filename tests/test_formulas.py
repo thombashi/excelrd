@@ -7,6 +7,7 @@ import excelrd
 
 from .base import from_this_dir
 
+
 try:
     ascii
 except NameError:

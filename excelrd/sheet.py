@@ -9,14 +9,9 @@ from struct import calcsize, unpack
 
 from .biffh import *
 from .formatting import Format, nearest_colour_index
-from .formula import (
-    FMLA_TYPE_CELL,
-    FMLA_TYPE_SHARED,
-    decompile_formula,
-    dump_formula,
-    rangename2d,
-)
+from .formula import FMLA_TYPE_CELL, FMLA_TYPE_SHARED, decompile_formula, dump_formula, rangename2d
 from .timemachine import *
+
 
 DEBUG = 0
 OBJ_MSO_DEBUG = 0

@@ -1,9 +1,8 @@
 import sys
 import unittest
+from io import StringIO
 
 from excelrd import biffh
-
-from io import StringIO
 
 
 class TestHexDump(unittest.TestCase):

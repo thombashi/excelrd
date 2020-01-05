@@ -8,6 +8,7 @@ from datetime import datetime
 
 from excelrd import xldate
 
+
 not_1904 = False
 is_1904 = True
 

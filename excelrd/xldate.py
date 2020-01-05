@@ -20,6 +20,7 @@ More importantly:
 """
 import datetime
 
+
 _JDN_delta = (2415080 - 61, 2416482 - 1)
 assert _JDN_delta[1] - _JDN_delta[0] == 1462
 
