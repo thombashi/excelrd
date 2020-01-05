@@ -52,7 +52,13 @@ setup(
     python_requires=">=3.5",
     setup_requires=pytest_runner_requires(),
     tests_require=TESTS_REQUIRES,
-    extras_require={"test": TESTS_REQUIRES,},
+    extras_require={
+        "dev": ["releasecmd>=0.2.0,<1", "twine", "wheel"]
+        + ["autoflake", "black", "isort"]
+        + ["pylama"]
+        + TESTS_REQUIRES,
+        "test": TESTS_REQUIRES,
+    },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
