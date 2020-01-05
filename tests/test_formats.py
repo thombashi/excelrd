@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Portions Copyright (C) 2010, Manfred Moitzi under a BSD licence
 
 import sys
@@ -9,25 +8,13 @@ import excelrd
 from .base import from_this_dir
 
 
-if sys.version_info[0] >= 3:
-
-    def u(s):
-        return s
-
-
-else:
-
-    def u(s):
-        return s.decode("utf-8")
-
-
 class TestCellContent(TestCase):
     def setUp(self):
         self.book = excelrd.open_workbook(from_this_dir("Formate.xls"), formatting_info=True)
-        self.sheet = self.book.sheet_by_name(u("Blätt1"))
+        self.sheet = self.book.sheet_by_name("Blätt1")
 
     def test_text_cells(self):
-        for row, name in enumerate([u("Huber"), u("Äcker"), u("Öcker")]):
+        for row, name in enumerate(["Huber", "Äcker", "Öcker"]):
             cell = self.sheet.cell(row, 0)
             self.assertEqual(cell.ctype, excelrd.book.XL_CELL_TEXT)
             self.assertEqual(cell.value, name)
@@ -68,14 +55,14 @@ class TestCellContent(TestCase):
             self.assertTrue(cell.xf_index > 0)
 
     def test_get_from_merged_cell(self):
-        sheet = self.book.sheet_by_name(u("ÖÄÜ"))
+        sheet = self.book.sheet_by_name("ÖÄÜ")
         cell = sheet.cell(2, 2)
         self.assertEqual(cell.ctype, excelrd.book.XL_CELL_TEXT)
         self.assertEqual(cell.value, "MERGED CELLS")
         self.assertTrue(cell.xf_index > 0)
 
     def test_ignore_diagram(self):
-        sheet = self.book.sheet_by_name(u("Blätt3"))
+        sheet = self.book.sheet_by_name("Blätt3")
         cell = sheet.cell(0, 0)
         self.assertEqual(cell.ctype, excelrd.book.XL_CELL_NUMBER)
         self.assertEqual(cell.value, 100)
