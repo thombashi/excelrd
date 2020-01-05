@@ -26,16 +26,26 @@
 **Quick start**:
 
 ```python
-import xlrd
+import excelrd
 
-book = xlrd.open_workbook("myfile.xls")
-print("The number of worksheets is {0}".format(book.nsheets))
-print("Worksheet name(s): {0}".format(book.sheet_names()))
-sh = book.sheet_by_index(0)
-print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
-print("Cell D30 is {0}".format(sh.cell_value(rowx=29, colx=3)))
-for rx in range(sh.nrows):
-    print(sh.row(rx))
+
+def main():
+    book = excelrd.open_workbook("namesdemo.xls")
+
+    print("The number of worksheets is {}".format(book.nsheets))
+    print("Worksheet name(s): {}".format(", ".join(book.sheet_names())))
+
+    sh = book.sheet_by_index(2)
+    print("{}: rows={}, cols={}".format(sh.name, sh.nrows, sh.ncols))
+
+    for row_idx in range(sh.nrows):
+        for col_idx in range(sh.ncols):
+            cell = sh.cell(row_idx, col_idx)
+
+            if not cell.value:
+                continue
+
+            print("row={}, col={}, value={}".format(row_idx, col_idx, cell.value))
 ```
 
 **Another quick start**: This will show the first, second and last rows of each sheet in each file:
