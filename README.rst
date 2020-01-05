@@ -73,8 +73,17 @@ Print all of the cell values in a specific sheet:
 
                     print("row={}, col={}, value={}".format(row_idx, col_idx, cell.value))
 
+Transition from xlrd to excelrd
+------------------------------------
+Just replace the ``import xlrd``:
+
+.. code:: python
+
+    import excelrd as xlrd
+
+
 Another quick start
----------------------------
+------------------------------------
 This will show the first, second and last rows
 of each sheet in each file:
 
