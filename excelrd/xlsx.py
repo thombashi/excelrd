@@ -828,7 +828,7 @@ def open_workbook_2007_xml(zf,
     x12sst = X12SST(bk, logfile, verbosity)
 
     # Different versions place the shared strings file in different locations.
-    # It's easier to check for each instead fo parsing XML to find a specific path reference.
+    # It's easier to check for each instead of parsing XML to find a specific path reference.
     sst_fname_candidates = ['xl/sharedstrings.xml', 'sharedstrings.xml']
     for sst_fname in sst_fname_candidates:
         if sst_fname in component_names:

@@ -484,7 +484,7 @@ Thanks to the following for their contributions to this release:
 + Gnumeric writes user-defined formats with format codes starting at
   50 instead of 164; worked around.
 + Thanks to Didrik Pinte for reporting the need for xlrd to be more
-  tolerant of the idiosyncracies of other software, for supplying sample
+  tolerant of the idiosyncrasies of other software, for supplying sample
   files, and for performing alpha testing.
 + '_' character in a format should be treated like an escape
   character; fixed.
