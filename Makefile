@@ -17,6 +17,7 @@ check:
 
 .PHONY: clean
 clean:
+	@python setup.py clean
 	@rm -rf $(PACKAGE)-*.*.*/ \
 		build/ \
 		dist/ \
@@ -25,7 +26,6 @@ clean:
 		.pytest_cache/ \
 		.tox/ \
 		*.egg-info/
-	@python setup.py clean
 	@find . -name "__pycache__" -type d -exec rm -rf "{}" \;
 	@find . -name "*.pyc" -delete
 
