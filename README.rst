@@ -10,9 +10,13 @@
     :target: https://pypi.org/project/excelrd
     :alt: Supported Python versions
 
+.. image:: https://img.shields.io/pypi/implementation/excelrd.svg
+    :target: https://pypi.org/project/excelrd
+    :alt: Supported Python implementations
+
 .. image:: https://img.shields.io/travis/thombashi/excelrd/master.svg?label=CI
     :target: https://travis-ci.org/thombashi/excelrd
-    :alt: CI status
+    :alt: Linux/macOS CI status
 
 .. image:: https://coveralls.io/repos/github/thombashi/excelrd/badge.svg?branch=master
     :target: https://coveralls.io/github/thombashi/excelrd?branch=master
@@ -20,8 +24,8 @@
 
 excelrd
 ==================
-``excelrd`` is a modified version of `xlrd <http://www.python-excel.org/>`__ to work for the latest Python.
-``xlrd`` will not work at Python 3.9 environments.
+``excelrd`` is a modified version of `xlrd <http://www.python-excel.org/>`__ to work for the latest Python versions.
+``xlrd`` will not work at Python 3.9 or newer versions.
 
 **Purpose**: Provide a library for developers to use to extract data from Microsoft Excel (tm) spreadsheet files. It is not an end-user tool.
 
