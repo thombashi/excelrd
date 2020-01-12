@@ -7,10 +7,12 @@ exclude = '''
     | \.mypy_cache
     | \.tox
     | \.venv
+    | \.pytype
     | _build
     | buck-out
     | build
     | dist
+    | examples
 )/
 | docs/conf.py
 '''
@@ -25,6 +27,7 @@ lines_after_imports = 2
 multi_line_output = 3
 skip_glob = [
     '*/.eggs/*',
+    '*/.pytype/*',
     '*/.tox/*',
 ]
 
