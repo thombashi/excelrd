@@ -26,8 +26,12 @@ matrix:
         - travis_retry pip install coveralls
         - coveralls
 
+    - os: osx
+      language: generic
+      env: TOXENV=py37
+
 install:
-  - travis_retry pip install tox
+  - travis_retry bash -x .travis/install.sh
 
 script:
   - tox
