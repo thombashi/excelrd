@@ -7,6 +7,7 @@ from excelrd.info import __VERSION__
 
 MODULE_NAME = "excelrd"
 REPOSITORY_URL = "https://github.com/thombashi/{:s}".format(MODULE_NAME)
+TESTS_REQUIRES = ["pytest"]
 
 
 def pytest_runner_requires() -> list:
@@ -14,9 +15,6 @@ def pytest_runner_requires() -> list:
         return ["pytest-runner"]
 
     return []
-
-
-TESTS_REQUIRES = ["pytest"]
 
 
 def get_release_command_class():
