@@ -33,8 +33,10 @@ ET_has_iterparse = False
 
 def ensure_elementtree_imported(verbosity, logfile):
     global ET, ET_has_iterparse
+
     if ET is not None:
         return
+
     if "IronPython" in sys.version:
         import xml.etree.ElementTree as ET
 
@@ -45,21 +47,10 @@ def ensure_elementtree_imported(verbosity, logfile):
             import defusedxml.cElementTree as ET
         except ImportError:
             try:
-                import xml.etree.cElementTree as ET
+                import lxml.etree as ET
             except ImportError:
-                try:
-                    import cElementTree as ET
-                except ImportError:
-                    try:
-                        import lxml.etree as ET
-                    except ImportError:
-                        try:
-                            import xml.etree.ElementTree as ET
-                        except ImportError:
-                            try:
-                                import elementtree.ElementTree as ET
-                            except ImportError:
-                                raise Exception("Failed to import an ElementTree implementation")
+                import xml.etree.ElementTree as ET
+
     if hasattr(ET, "iterparse"):
         _dummy_stream = BYTES_IO(b"")
         try:
