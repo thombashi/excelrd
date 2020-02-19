@@ -18,7 +18,7 @@ class XLRDError(Exception):
     """
 
 
-class BaseObject(object):
+class BaseObject:
     """
     Parent of almost all other classes in the package. Defines a common
     :meth:`dump` method for debugging.
@@ -51,7 +51,7 @@ class BaseObject(object):
             if getattr(value, "dump", None) and attr != "book":
                 value.dump(
                     f,
-                    header="%s%s (%s object):" % (pad, attr, value.__class__.__name__),
+                    header="{}{} ({} object):".format(pad, attr, value.__class__.__name__),
                     indent=indent + 4,
                 )
             elif attr not in self._repr_these and (

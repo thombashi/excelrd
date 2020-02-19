@@ -31,7 +31,7 @@ class CompDocError(Exception):
     pass
 
 
-class DirNode(object):
+class DirNode:
     def __init__(self, DID, dent, DEBUG=0, logfile=sys.stdout):
         # dent is the 128-byte directory entry
         self.DID = DID
@@ -81,7 +81,7 @@ def _build_family_tree(dirlist, parent_DID, child_DID):
         _build_family_tree(dirlist, child_DID, dirlist[child_DID].root_DID)
 
 
-class CompDoc(object):
+class CompDoc:
     """
     Compound document handler.
 
@@ -101,7 +101,7 @@ class CompDoc(object):
         revision, version = unpack("<HH", mem[24:28])
         if DEBUG:
             print(
-                "\nCompDoc format: version=0x%04x revision=0x%04x" % (version, revision),
+                "\nCompDoc format: version=0x{:04x} revision=0x{:04x}".format(version, revision),
                 file=logfile,
             )
         self.mem = mem

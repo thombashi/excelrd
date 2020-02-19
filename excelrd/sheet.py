@@ -2537,9 +2537,9 @@ class Cell(BaseObject):
 
     def __repr__(self):
         if self.xf_index is None:
-            return "%s:%r" % (ctype_text[self.ctype], self.value)
+            return "{}:{!r}".format(ctype_text[self.ctype], self.value)
         else:
-            return "%s:%r (XF:%r)" % (ctype_text[self.ctype], self.value, self.xf_index)
+            return "{}:{!r} (XF:{!r})".format(ctype_text[self.ctype], self.value, self.xf_index)
 
 
 empty_cell = Cell(XL_CELL_EMPTY, UNICODE_LITERAL(""))

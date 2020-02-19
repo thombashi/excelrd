@@ -798,7 +798,7 @@ tAttrNames = {
     0x41: "SpaceVolatile",
 }
 
-error_opcodes = set([0x07, 0x08, 0x0A, 0x0B, 0x1C, 0x1D, 0x2F])
+error_opcodes = {0x07, 0x08, 0x0A, 0x0B, 0x1C, 0x1D, 0x2F}
 
 tRangeFuncs = (min, max, min, max, min, max)
 tIsectFuncs = (max, min, max, min, max, min)
@@ -956,7 +956,7 @@ class FormulaError(Exception):
     pass
 
 
-class Operand(object):
+class Operand:
     """
     Used in evaluating formulas.
     The following table describes the kinds and how their values
@@ -1044,7 +1044,7 @@ class Operand(object):
 
     def __repr__(self):
         kind_text = okind_dict.get(self.kind, "?Unknown kind?")
-        return "Operand(kind=%s, value=%r, text=%r)" % (kind_text, self.value, self.text)
+        return "Operand(kind={}, value={!r}, text={!r})".format(kind_text, self.value, self.text)
 
 
 class Ref3D(tuple):
@@ -1105,9 +1105,9 @@ class Ref3D(tuple):
 
     def __repr__(self):
         if not self.relflags or self.relflags == (0, 0, 0, 0, 0, 0):
-            return "Ref3D(coords=%r)" % (self.coords,)
+            return "Ref3D(coords={!r})".format(self.coords)
         else:
-            return "Ref3D(coords=%r, relflags=%r)" % (self.coords, self.relflags)
+            return "Ref3D(coords={!r}, relflags={!r})".format(self.coords, self.relflags)
 
 
 tAdd = 0x03
@@ -1264,7 +1264,7 @@ def evaluate_name_formula(bk, nobj, namex, blah=0, level=0):
         stk.append(Operand(result_kind, val, rank, otext))
 
     def not_in_name_formula(op_arg, oname_arg):
-        msg = "ERROR *** Token 0x%02x (%s) found in NAME formula" % (op_arg, oname_arg)
+        msg = "ERROR *** Token 0x{:02x} ({}) found in NAME formula".format(op_arg, oname_arg)
         raise FormulaError(msg)
 
     if fmlalen == 0:
@@ -1513,7 +1513,7 @@ def evaluate_name_formula(bk, nobj, namex, blah=0, level=0):
                 assert len(stack) >= nargs
                 if nargs:
                     argtext = listsep.join(arg.text for arg in stack[-nargs:])
-                    otext = "%s(%s)" % (func_name, argtext)
+                    otext = "{}({})".format(func_name, argtext)
                     del stack[-nargs:]
                 else:
                     otext = func_name + "()"
@@ -1544,7 +1544,7 @@ def evaluate_name_formula(bk, nobj, namex, blah=0, level=0):
                 assert len(stack) >= nargs
                 assert len(stack) >= nargs
                 argtext = listsep.join(arg.text for arg in stack[-nargs:])
-                otext = "%s(%s)" % (func_name, argtext)
+                otext = "{}({})".format(func_name, argtext)
                 res = Operand(oUNK, None, FUNC_RANK, otext)
                 if funcx == 1:  # IF
                     testarg = stack[-nargs]
@@ -1604,7 +1604,7 @@ def evaluate_name_formula(bk, nobj, namex, blah=0, level=0):
             if tgtobj.scope == -1:
                 res.text = tgtobj.name
             else:
-                res.text = "%s!%s" % (bk._sheet_names[tgtobj.scope], tgtobj.name)
+                res.text = "{}!{}".format(bk._sheet_names[tgtobj.scope], tgtobj.name)
             if blah:
                 print("    tName: setting text to", repr(res.text), file=bk.logfile)
             spush(res)
@@ -1792,7 +1792,7 @@ def evaluate_name_formula(bk, nobj, namex, blah=0, level=0):
                 if tgtobj.scope == -1:
                     res.text = tgtobj.name
                 else:
-                    res.text = "%s!%s" % (bk._sheet_names[tgtobj.scope], tgtobj.name)
+                    res.text = "{}!{}".format(bk._sheet_names[tgtobj.scope], tgtobj.name)
                 if blah:
                     print("    tNameX: setting text to", repr(res.text), file=bk.logfile)
             spush(res)
@@ -1889,10 +1889,8 @@ def decompile_formula(
         stk.append(Operand(result_kind, None, rank, otext))
 
     def unexpected_opcode(op_arg, oname_arg):
-        msg = "ERROR *** Unexpected token 0x%02x (%s) found in formula type %s" % (
-            op_arg,
-            oname_arg,
-            FMLA_TYPEDESCR_MAP[fmlatype],
+        msg = "ERROR *** Unexpected token 0x{:02x} ({}) found in formula type {}".format(
+            op_arg, oname_arg, FMLA_TYPEDESCR_MAP[fmlatype],
         )
         print(msg, file=bk.logfile)
         # raise FormulaError(msg)
@@ -2124,7 +2122,7 @@ def decompile_formula(
                 assert len(stack) >= nargs
                 if nargs:
                     argtext = listsep.join(arg.text for arg in stack[-nargs:])
-                    otext = "%s(%s)" % (func_name, argtext)
+                    otext = "{}({})".format(func_name, argtext)
                     del stack[-nargs:]
                 else:
                     otext = func_name + "()"
@@ -2159,7 +2157,7 @@ def decompile_formula(
                 assert len(stack) >= nargs
                 assert len(stack) >= nargs
                 argtext = listsep.join(arg.text for arg in stack[-nargs:])
-                otext = "%s(%s)" % (func_name, argtext)
+                otext = "{}({})".format(func_name, argtext)
                 res = Operand(oUNK, None, FUNC_RANK, otext)
                 del stack[-nargs:]
                 spush(res)
@@ -2172,7 +2170,7 @@ def decompile_formula(
             if tgtobj.scope == -1:
                 otext = tgtobj.name
             else:
-                otext = "%s!%s" % (bk._sheet_names[tgtobj.scope], tgtobj.name)
+                otext = "{}!{}".format(bk._sheet_names[tgtobj.scope], tgtobj.name)
             if blah:
                 print("    tName: setting text to", repr(otext), file=bk.logfile)
             res = Operand(oUNK, None, LEAF_RANK, otext)
@@ -2366,7 +2364,7 @@ def decompile_formula(
                 if tgtobj.scope == -1:
                     otext = tgtobj.name
                 else:
-                    otext = "%s!%s" % (bk._sheet_names[tgtobj.scope], tgtobj.name)
+                    otext = "{}!{}".format(bk._sheet_names[tgtobj.scope], tgtobj.name)
                 if blah:
                     print("    tNameX: setting text to", repr(res.text), file=bk.logfile)
             res = Operand(okind, ovalue, LEAF_RANK, otext)
@@ -2673,7 +2671,7 @@ def rangename2d(rlo, rhi, clo, chi, r1c1=0):
         return
     if rhi == rlo + 1 and chi == clo + 1:
         return cellnameabs(rlo, clo, r1c1)
-    return "%s:%s" % (cellnameabs(rlo, clo, r1c1), cellnameabs(rhi - 1, chi - 1, r1c1))
+    return "{}:{}".format(cellnameabs(rlo, clo, r1c1), cellnameabs(rhi - 1, chi - 1, r1c1))
 
 
 def rangename2drel(rlo_rhi_clo_chi, rlorel_rhirel_clorel_chirel, browx=None, bcolx=None, r1c1=0):
@@ -2683,7 +2681,7 @@ def rangename2drel(rlo_rhi_clo_chi, rlorel_rhirel_clorel_chirel, browx=None, bco
         r1c1 = True
     if (clorel or chirel) and bcolx is None:
         r1c1 = True
-    return "%s:%s" % (
+    return "{}:{}".format(
         cellnamerel(rlo, clo, rlorel, clorel, browx, bcolx, r1c1),
         cellnamerel(rhi - 1, chi - 1, rhirel, chirel, browx, bcolx, r1c1),
     )
@@ -2697,7 +2695,7 @@ def rangename3d(book, ref3d):
     (assuming Excel's default sheetnames)
     """
     coords = ref3d.coords
-    return "%s!%s" % (sheetrange(book, *coords[:2]), rangename2d(*coords[2:6]))
+    return "{}!{}".format(sheetrange(book, *coords[:2]), rangename2d(*coords[2:6]))
 
 
 def rangename3drel(book, ref3d, browx=None, bcolx=None, r1c1=0):
@@ -2715,7 +2713,7 @@ def rangename3drel(book, ref3d, browx=None, bcolx=None, r1c1=0):
     rngdesc = rangename2drel(coords[2:6], relflags[2:6], browx, bcolx, r1c1)
     if not shdesc:
         return rngdesc
-    return "%s!%s" % (shdesc, rngdesc)
+    return "{}!{}".format(shdesc, rngdesc)
 
 
 def quotedsheetname(shnames, shx):

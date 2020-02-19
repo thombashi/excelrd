@@ -126,7 +126,7 @@ def cell_name_to_rowx_colx(cell_name, letter_value=_UPPERCASE_1_REL_INDEX, allow
                     assert 0 <= colx < X12_MAX_COLS
                     break
     except KeyError:
-        raise Exception("Unexpected character %r in cell name %r" % (c, cell_name))
+        raise Exception("Unexpected character {!r} in cell name {!r}".format(c, cell_name))
     rowx = int(cell_name[charx:]) - 1
     return rowx, colx
 
@@ -267,7 +267,7 @@ def make_name_access_maps(bk):
         name_lcase = nobj.name.lower()
         key = (name_lcase, nobj.scope)
         if key in name_and_scope_map:
-            msg = "Duplicate entry %r in name_and_scope_map" % (key,)
+            msg = "Duplicate entry {!r} in name_and_scope_map".format(key)
             if 0:
                 raise XLRDError(msg)
             else:
@@ -287,7 +287,7 @@ def make_name_access_maps(bk):
     bk.name_map = name_map
 
 
-class X12General(object):
+class X12General:
     def process_stream(self, stream, heading=None):
         if self.verbosity >= 2 and heading is not None:
             fprintf(self.logfile, "\n=== %s ===\n", heading)
@@ -708,9 +708,13 @@ class X12Sheet(X12General):
                             assert 0 <= colx < X12_MAX_COLS
                             break
                 except KeyError:
-                    raise Exception("Unexpected character %r in cell name %r" % (c, cell_name))
+                    raise Exception(
+                        "Unexpected character {!r} in cell name {!r}".format(c, cell_name)
+                    )
                 if explicit_row_number and cell_name[charx:] != row_number:
-                    raise Exception("cell name %r but row number is %r" % (cell_name, row_number))
+                    raise Exception(
+                        "cell name {!r} but row number is {!r}".format(cell_name, row_number)
+                    )
             xf_index = int(cell_elem.get("s", "0"))
             cell_type = cell_elem.get("t", "n")
             tvalue = None

@@ -11,7 +11,7 @@ intersphinx_mapping = {'http://docs.python.org': None}
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx']
 source_suffix = '.rst'
 master_doc = 'index'
-project = u'excelrd'
+project = 'excelrd'
 copyright = '2005-%s Stephen John Machin, Lingfo Pty Ltd' % datetime.datetime.now().year
 version = release = pkg_info.version
 exclude_patterns = ['_build']

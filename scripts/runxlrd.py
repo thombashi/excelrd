@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
     from excelrd.timemachine import REPR
 
-    class LogHandler(object):
+    class LogHandler:
         def __init__(self, logfileobj):
             self.logfileobj = logfileobj
             self.fileheading = None
@@ -94,7 +94,7 @@ if __name__ == "__main__":
                 try:
                     showval = excelrd.xldate_as_tuple(cval, dmode)
                 except excelrd.XLDateError as e:
-                    showval = "%s:%s" % (type(e).__name__, e)
+                    showval = "{}:{}".format(type(e).__name__, e)
                     cty = excelrd.XL_CELL_ERROR
             elif cty == excelrd.XL_CELL_ERROR:
                 showval = excelrd.error_text_from_code.get(
@@ -112,7 +112,9 @@ if __name__ == "__main__":
             % (excelrd.biff_text_from_num[bk.biff_version], bk.datemode)
         )
         print(
-            "codepage: %r (encoding: %s); countries: %r" % (bk.codepage, bk.encoding, bk.countries)
+            "codepage: {!r} (encoding: {}); countries: {!r}".format(
+                bk.codepage, bk.encoding, bk.countries
+            )
         )
         print("Last saved by: %r" % bk.user_name)
         print("Number of data sheets: %d" % bk.nsheets)
@@ -167,7 +169,7 @@ if __name__ == "__main__":
             )
             for rx in range(rlo, rhi):
                 for cx in range(clo, chi):
-                    print("    %s: %r" % (excelrd.cellname(rx, cx), sh.cell_value(rx, cx)))
+                    print("    {}: {!r}".format(excelrd.cellname(rx, cx), sh.cell_value(rx, cx)))
 
     def show_labels(bk):
         # bk_header(bk)
@@ -336,7 +338,7 @@ if __name__ == "__main__":
             excelrd.count_records(args[1])
             sys.exit(0)
         if cmd == "version":
-            print("excelrd: %s, from %s" % (xlrd_version, excelrd.__file__))
+            print("excelrd: {}, from {}".format(xlrd_version, excelrd.__file__))
             print("Python:", sys.version)
             sys.exit(0)
         if options.logfilename:
@@ -376,16 +378,16 @@ if __name__ == "__main__":
                     )
                     t1 = time.time()
                     if not options.suppress_timing:
-                        print("Open took %.2f seconds" % (t1 - t0,))
+                        print("Open took {:.2f} seconds".format(t1 - t0))
                 except excelrd.XLRDError as e:
-                    print("*** Open failed: %s: %s" % (type(e).__name__, e))
+                    print("*** Open failed: {}: {}".format(type(e).__name__, e))
                     continue
                 except KeyboardInterrupt:
                     print("*** KeyboardInterrupt ***")
                     traceback.print_exc(file=sys.stdout)
                     sys.exit(1)
                 except BaseException as e:
-                    print("*** Open failed: %s: %s" % (type(e).__name__, e))
+                    print("*** Open failed: {}: {}".format(type(e).__name__, e))
                     traceback.print_exc(file=sys.stdout)
                     continue
                 t0 = time.time()
@@ -422,7 +424,7 @@ if __name__ == "__main__":
                         print("GC post cmd:", fname, "->", n_unreachable, "unreachable objects")
                 if not options.suppress_timing:
                     t1 = time.time()
-                    print("\ncommand took %.2f seconds\n" % (t1 - t0,))
+                    print("\ncommand took {:.2f} seconds\n".format(t1 - t0))
 
         return None
 

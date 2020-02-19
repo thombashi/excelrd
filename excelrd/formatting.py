@@ -252,7 +252,7 @@ def nearest_colour_index(colour_map, rgb, debug=0):
     return best_colourx
 
 
-class EqNeAttrs(object):
+class EqNeAttrs:
     """
     This mixin class exists solely so that :class:`Format`, :class:`Font`, and
     :class:`XF` objects can be compared by value of their attributes.

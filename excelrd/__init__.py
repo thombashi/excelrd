@@ -139,7 +139,7 @@ def open_workbook(
         # Workaround for some third party files that use forward slashes and
         # lower case names. We map the expected name in lowercase to the
         # actual filename in the zip container.
-        component_names = dict([(X12Book.convert_filename(name), name) for name in zf.namelist()])
+        component_names = {X12Book.convert_filename(name): name for name in zf.namelist()}
 
         if verbosity:
             logfile.write("ZIP component_names:\n")
