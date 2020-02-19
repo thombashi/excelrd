@@ -17,17 +17,7 @@ check:
 
 .PHONY: clean
 clean:
-	@python setup.py clean
-	@rm -rf $(PACKAGE)-*.*.*/ \
-		build/ \
-		dist/ \
-		pip-wheel-metadata/ \
-		.eggs/ \
-		.pytest_cache/ \
-		.tox/ \
-		*.egg-info/
-	@find . -name "__pycache__" -type d -exec rm -rf "{}" \;
-	@find . -name "*.pyc" -delete
+	@tox -e clean
 
 .PHONY: fmt
 fmt:
