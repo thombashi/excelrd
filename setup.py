@@ -10,13 +10,6 @@ REPOSITORY_URL = "https://github.com/thombashi/{:s}".format(MODULE_NAME)
 TESTS_REQUIRES = ["pytest"]
 
 
-def pytest_runner_requires() -> list:
-    if set(["pytest", "test", "ptr"]).intersection(sys.argv):
-        return ["pytest-runner"]
-
-    return []
-
-
 def get_release_command_class():
     try:
         from releasecmd import ReleaseCommand
@@ -48,7 +41,6 @@ setup(
     license="BSD",
     keywords=["xls", "excel", "spreadsheet", "workbook"],
     python_requires=">=3.5",
-    setup_requires=pytest_runner_requires(),
     tests_require=TESTS_REQUIRES,
     extras_require={
         "dev": ["releasecmd>=0.2.0,<1", "twine", "wheel"] + ["pylama"] + TESTS_REQUIRES,
