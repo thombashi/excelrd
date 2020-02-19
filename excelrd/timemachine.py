@@ -26,4 +26,3 @@ def fprintf(f, fmt, *vargs):
 
 EXCEL_TEXT_TYPES = (str, bytes, bytearray)  # xlwt: isinstance(obj, EXCEL_TEXT_TYPES)
 REPR = ascii
-ensure_unicode = lambda s: s

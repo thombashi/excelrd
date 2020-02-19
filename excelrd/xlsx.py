@@ -159,7 +159,7 @@ def cooked_text(self, elem):
         return ""
     if elem.get(XML_SPACE_ATTR) != "preserve":
         t = t.strip(XML_WHITESPACE)
-    return ensure_unicode(unescape(t))
+    return unescape(t)
 
 
 def get_text_from_si_or_is(self, elem, r_tag=U_SSML12 + "r", t_tag=U_SSML12 + "t"):
@@ -196,7 +196,8 @@ def map_attributes(amap, elem, obj):
 def cnv_ST_Xstring(s):
     if s is None:
         return ""
-    return ensure_unicode(s)
+
+    return s
 
 
 def cnv_xsd_unsignedInt(s):
@@ -403,7 +404,7 @@ class X12Book(X12General):
         # print elem.attrib
         rid = elem.get(U_ODREL + "id")
         sheetId = int(elem.get("sheetId"))
-        name = unescape(ensure_unicode(elem.get("name")))
+        name = unescape(elem.get("name"))
         reltype = self.relid2reltype[rid]
         target = self.relid2path[rid]
         if self.verbosity >= 2:
@@ -517,7 +518,7 @@ class X12Styles(X12General):
         self.xf_type = 1
 
     def do_numfmt(self, elem):
-        formatCode = ensure_unicode(elem.get("formatCode"))
+        formatCode = elem.get("formatCode")
         numFmtId = int(elem.get("numFmtId"))
         is_date = is_date_format_string(self.bk, formatCode)
         self.fmt_is_date[numFmtId] = is_date
