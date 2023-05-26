@@ -1,12 +1,10 @@
 PACKAGE := excelrd
+PYTHON := python3
 
 
 .PHONY: build
-build:
-	@make clean
-	@python setup.py sdist bdist_wheel
-	@twine check dist/*
-	@python setup.py clean
+build: clean
+	@$(PYTHON) -m tox -e build
 	ls -lh dist/*
 
 .PHONY: check
