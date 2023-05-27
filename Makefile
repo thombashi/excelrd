@@ -21,6 +21,10 @@ clean:
 fmt:
 	tox -e fmt
 
+.PHONY: setup-ci
+setup-ci:
+	@$(PYTHON) -m pip install -q --disable-pip-version-check --upgrade tox
+
 .PHONY: setup
-setup:
-	@pip install --upgrade .[dev] tox
+setup: setup-ci
+	@$(PYTHON) -m pip install -q --disable-pip-version-check --upgrade .[dev]
