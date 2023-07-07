@@ -1,4 +1,4 @@
-import sys
+import os
 
 from setuptools import setup
 
@@ -7,7 +7,7 @@ from excelrd.info import __VERSION__
 
 MODULE_NAME = "excelrd"
 REPOSITORY_URL = "https://github.com/thombashi/{:s}".format(MODULE_NAME)
-TESTS_REQUIRES = ["pytest"]
+REQUIREMENT_DIR = "requirements"
 
 
 def get_release_command_class():
@@ -22,6 +22,8 @@ def get_release_command_class():
 with open("README.rst") as fp:
     long_description = fp.read()
 
+with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
+    TESTS_REQUIRES = [line.strip() for line in f if line.strip()]
 
 setup(
     name=MODULE_NAME,
