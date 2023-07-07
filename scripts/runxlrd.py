@@ -330,7 +330,7 @@ if __name__ == "__main__":
         elif len(args) < 2:
             oparser.error("Expected at least 2 args, found %d" % len(args))
         cmd = args[0]
-        xlrd_version = getattr(excelrd, "__VERSION__", "unknown; before 0.5")
+        xlrd_version = getattr(excelrd, "__version__", "unknown; before 0.5")
         if cmd == "biff_dump":
             excelrd.dump(args[1], unnumbered=options.unnumbered)
             sys.exit(0)

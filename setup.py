@@ -2,13 +2,14 @@ import os
 
 import setuptools
 
-from excelrd.info import __VERSION__
+from typing import Dict, Type
 
 
 MODULE_NAME = "excelrd"
-REPOSITORY_URL = "https://github.com/thombashi/{:s}".format(MODULE_NAME)
+REPOSITORY_URL = f"https://github.com/thombashi/{MODULE_NAME:s}"
 REQUIREMENT_DIR = "requirements"
 
+pkg_info: Dict[str, str] = {}
 
 def get_release_command_class():
     try:
@@ -19,6 +20,10 @@ def get_release_command_class():
     return {"release": ReleaseCommand}
 
 
+with open(os.path.join(MODULE_NAME, "__version__.py")) as f:
+    exec(f.read(), pkg_info)
+
+
 with open("README.rst") as fp:
     long_description = fp.read()
 
@@ -27,11 +32,11 @@ with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
 
 setuptools.setup(
     name=MODULE_NAME,
-    version=__VERSION__,
-    author="John Machin",
-    author_email="sjmachin@lexicon.net",
-    maintainer="Tsuyoshi Hombashi",
-    maintainer_email="tsuyoshi.hombashi@gmail.com",
+    version=pkg_info["__version__"],
+    author=pkg_info["__author__"],
+    author_email=pkg_info["__email__"],
+    maintainer=pkg_info["__maintainer__"],
+    maintainer_email=pkg_info["__maintainer_email__"],
     url="https://github.com/thombashi/excelrd",
     packages=["excelrd"],
     scripts=[
@@ -42,7 +47,7 @@ setuptools.setup(
     ),
     long_description=long_description,
     long_description_content_type="text/x-rst",
-    license="BSD",
+    license=pkg_info["__license__"],
     keywords=["xls", "excel", "spreadsheet", "workbook"],
     python_requires=">=3.6",
     tests_require=TESTS_REQUIRES,
