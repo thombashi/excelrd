@@ -1,6 +1,6 @@
 import os
 
-from setuptools import setup
+import setuptools
 
 from excelrd.info import __VERSION__
 
@@ -25,7 +25,7 @@ with open("README.rst") as fp:
 with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
     TESTS_REQUIRES = [line.strip() for line in f if line.strip()]
 
-setup(
+setuptools.setup(
     name=MODULE_NAME,
     version=__VERSION__,
     author="John Machin",
