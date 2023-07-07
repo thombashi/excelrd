@@ -1,11 +1,11 @@
 include LICENSE
-include README.md
+include README.rst
 include setup.cfg
 include tox.ini
 
-graft docs
-graft examples
-graft tests
+recursive-include requirements *
+recursive-include examples *
+recursive-include tests *
 
 global-exclude __pycache__/*
 global-exclude *.pyc
