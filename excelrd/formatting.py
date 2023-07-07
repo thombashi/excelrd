@@ -885,7 +885,12 @@ def handle_xf(self, data):
             pkd_brdbkg3,
         ) = unpack(unpack_fmt, data[0:20])
         upkbits(
-            xf.protection, pkd_type_par, ((0, 0x01, "cell_locked"), (1, 0x02, "formula_hidden"),)
+            xf.protection,
+            pkd_type_par,
+            (
+                (0, 0x01, "cell_locked"),
+                (1, 0x02, "formula_hidden"),
+            ),
         )
         upkbits(
             xf,
@@ -902,12 +907,20 @@ def handle_xf(self, data):
         upkbits(
             xf.alignment,
             pkd_align1,
-            ((0, 0x07, "hor_align"), (3, 0x08, "text_wrapped"), (4, 0x70, "vert_align"),),
+            (
+                (0, 0x07, "hor_align"),
+                (3, 0x08, "text_wrapped"),
+                (4, 0x70, "vert_align"),
+            ),
         )
         upkbits(
             xf.alignment,
             pkd_align2,
-            ((0, 0x0F, "indent_level"), (4, 0x10, "shrink_to_fit"), (6, 0xC0, "text_direction"),),
+            (
+                (0, 0x0F, "indent_level"),
+                (4, 0x10, "shrink_to_fit"),
+                (6, 0xC0, "text_direction"),
+            ),
         )
         reg = pkd_used >> 2
         attr_stems = [
@@ -950,7 +963,10 @@ def handle_xf(self, data):
         upkbits(
             xf.background,
             pkd_brdbkg3,
-            ((0, 0x007F, "pattern_colour_index"), (7, 0x3F80, "background_colour_index"),),
+            (
+                (0, 0x007F, "pattern_colour_index"),
+                (7, 0x3F80, "background_colour_index"),
+            ),
         )
     elif bv >= 50:
         unpack_fmt = "<HHHBBIi"
@@ -964,7 +980,12 @@ def handle_xf(self, data):
             pkd_brdbkg2,
         ) = unpack(unpack_fmt, data[0:16])
         upkbits(
-            xf.protection, pkd_type_par, ((0, 0x01, "cell_locked"), (1, 0x02, "formula_hidden"),)
+            xf.protection,
+            pkd_type_par,
+            (
+                (0, 0x01, "cell_locked"),
+                (1, 0x02, "formula_hidden"),
+            ),
         )
         upkbits(
             xf,
@@ -978,7 +999,11 @@ def handle_xf(self, data):
         upkbits(
             xf.alignment,
             pkd_align1,
-            ((0, 0x07, "hor_align"), (3, 0x08, "text_wrapped"), (4, 0x70, "vert_align"),),
+            (
+                (0, 0x07, "hor_align"),
+                (3, 0x08, "text_wrapped"),
+                (4, 0x70, "vert_align"),
+            ),
         )
         orientation = pkd_orient_used & 0x03
         xf.alignment.rotation = [0, 255, 90, 180][orientation]
@@ -1007,7 +1032,10 @@ def handle_xf(self, data):
         upkbitsL(
             xf.border,
             pkd_brdbkg1,
-            ((22, 0x01C00000, "bottom_line_style"), (25, 0xFE000000, "bottom_colour_index"),),
+            (
+                (22, 0x01C00000, "bottom_line_style"),
+                (25, 0xFE000000, "bottom_colour_index"),
+            ),
         )
         upkbits(
             xf.border,
@@ -1033,7 +1061,12 @@ def handle_xf(self, data):
             pkd_brd_34,
         ) = unpack(unpack_fmt, data[0:12])
         upkbits(
-            xf.protection, pkd_type_par, ((0, 0x01, "cell_locked"), (1, 0x02, "formula_hidden"),)
+            xf.protection,
+            pkd_type_par,
+            (
+                (0, 0x01, "cell_locked"),
+                (1, 0x02, "formula_hidden"),
+            ),
         )
         upkbits(
             xf,
@@ -1047,7 +1080,11 @@ def handle_xf(self, data):
         upkbits(
             xf.alignment,
             pkd_align_orient,
-            ((0, 0x07, "hor_align"), (3, 0x08, "text_wrapped"), (4, 0x30, "vert_align"),),
+            (
+                (0, 0x07, "hor_align"),
+                (3, 0x08, "text_wrapped"),
+                (4, 0x30, "vert_align"),
+            ),
         )
         orientation = (pkd_align_orient & 0xC0) >> 6
         xf.alignment.rotation = [0, 255, 90, 180][orientation]
@@ -1099,14 +1136,29 @@ def handle_xf(self, data):
             pkd_brd_34,
         ) = unpack(unpack_fmt, data[0:12])
         upkbits(
-            xf.protection, pkd_type_prot, ((0, 0x01, "cell_locked"), (1, 0x02, "formula_hidden"),)
+            xf.protection,
+            pkd_type_prot,
+            (
+                (0, 0x01, "cell_locked"),
+                (1, 0x02, "formula_hidden"),
+            ),
         )
         upkbits(
             xf,
             pkd_type_prot,
-            ((2, 0x0004, "is_style"), (3, 0x0008, "lotus_123_prefix"),),  # Meaning is not known.
+            (
+                (2, 0x0004, "is_style"),
+                (3, 0x0008, "lotus_123_prefix"),
+            ),  # Meaning is not known.
         )
-        upkbits(xf.alignment, pkd_align_par, ((0, 0x07, "hor_align"), (3, 0x08, "text_wrapped"),))
+        upkbits(
+            xf.alignment,
+            pkd_align_par,
+            (
+                (0, 0x07, "hor_align"),
+                (3, 0x08, "text_wrapped"),
+            ),
+        )
         upkbits(xf, pkd_align_par, ((4, 0xFFF0, "parent_style_index"),))
         reg = pkd_used >> 2
         attr_stems = [
@@ -1153,7 +1205,14 @@ def handle_xf(self, data):
         ## all XF references in cell records :-(
         (xf.font_index, format_etc, halign_etc) = unpack("<BxBB", data)
         xf.format_key = format_etc & 0x3F
-        upkbits(xf.protection, format_etc, ((6, 0x40, "cell_locked"), (7, 0x80, "formula_hidden"),))
+        upkbits(
+            xf.protection,
+            format_etc,
+            (
+                (6, 0x40, "cell_locked"),
+                (7, 0x80, "formula_hidden"),
+            ),
+        )
         upkbits(xf.alignment, halign_etc, ((0, 0x07, "hor_align"),))
         for mask, side in ((0x08, "left"), (0x10, "right"), (0x20, "top"), (0x40, "bottom")):
             if halign_etc & mask:
@@ -1191,7 +1250,9 @@ def handle_xf(self, data):
     self.xfcount += 1
     if blah:
         xf.dump(
-            self.logfile, header="--- handle_xf: xf[%d] ---" % xf.xf_index, footer=" ",
+            self.logfile,
+            header="--- handle_xf: xf[%d] ---" % xf.xf_index,
+            footer=" ",
         )
     try:
         fmt = self.format_map[xf.format_key]

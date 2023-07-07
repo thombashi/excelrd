@@ -1124,7 +1124,7 @@ def nop(x):
 
 
 def _opr_pow(x, y):
-    return x ** y
+    return x**y
 
 
 def _opr_lt(x, y):
@@ -1170,7 +1170,7 @@ binop_rules = {
     tSub: (_arith_argdict, oNUM, opr.sub, 30, "-"),
     tMul: (_arith_argdict, oNUM, opr.mul, 40, "*"),
     tDiv: (_arith_argdict, oNUM, opr.truediv, 40, "/"),
-    tPower: (_arith_argdict, oNUM, _opr_pow, 50, "^",),
+    tPower: (_arith_argdict, oNUM, _opr_pow, 50, "^"),
     tConcat: (_strg_argdict, oSTRG, opr.add, 20, "&"),
     tLT: (_cmp_argdict, oBOOL, _opr_lt, 10, "<"),
     tLE: (_cmp_argdict, oBOOL, _opr_le, 10, "<="),
@@ -1258,7 +1258,15 @@ def evaluate_name_formula(bk, nobj, namex, blah=0, level=0):
         aop = stk.pop()
         val = aop.value
         func, rank, sym1, sym2 = unop_rules[opcode]
-        otext = "".join([sym1, "("[: aop.rank < rank], aop.text, ")"[: aop.rank < rank], sym2,])
+        otext = "".join(
+            [
+                sym1,
+                "("[: aop.rank < rank],
+                aop.text,
+                ")"[: aop.rank < rank],
+                sym2,
+            ]
+        )
         if val is not None:
             val = func(val)
         stk.append(Operand(result_kind, val, rank, otext))
@@ -1780,7 +1788,9 @@ def evaluate_name_formula(bk, nobj, namex, blah=0, level=0):
                 if tgtobj.macro or tgtobj.binary or tgtobj.any_err:
                     if blah:
                         tgtobj.dump(
-                            bk.logfile, header="!!! bad tgtobj !!!", footer="------------------",
+                            bk.logfile,
+                            header="!!! bad tgtobj !!!",
+                            footer="------------------",
                         )
                     res = Operand(oUNK, None)
                     any_err = any_err or tgtobj.macro or tgtobj.binary or tgtobj.any_err
@@ -1885,12 +1895,22 @@ def decompile_formula(
         assert len(stk) >= 1
         aop = stk.pop()
         func, rank, sym1, sym2 = unop_rules[opcode]
-        otext = "".join([sym1, "("[: aop.rank < rank], aop.text, ")"[: aop.rank < rank], sym2,])
+        otext = "".join(
+            [
+                sym1,
+                "("[: aop.rank < rank],
+                aop.text,
+                ")"[: aop.rank < rank],
+                sym2,
+            ]
+        )
         stk.append(Operand(result_kind, None, rank, otext))
 
     def unexpected_opcode(op_arg, oname_arg):
         msg = "ERROR *** Unexpected token 0x{:02x} ({}) found in formula type {}".format(
-            op_arg, oname_arg, FMLA_TYPEDESCR_MAP[fmlatype],
+            op_arg,
+            oname_arg,
+            FMLA_TYPEDESCR_MAP[fmlatype],
         )
         print(msg, file=bk.logfile)
         # raise FormulaError(msg)
@@ -2666,7 +2686,7 @@ def colname(colx):
 
 
 def rangename2d(rlo, rhi, clo, chi, r1c1=0):
-    """ ``(5, 20, 7, 10)`` => ``'$H$6:$J$20'`` """
+    """``(5, 20, 7, 10)`` => ``'$H$6:$J$20'``"""
     if r1c1:
         return
     if rhi == rlo + 1 and chi == clo + 1:

@@ -193,7 +193,8 @@ def dump(filename, outfile=sys.stdout, unnumbered=False):
 
     bk = Book()
     bk.biff2_8_load(
-        filename=filename, logfile=outfile,
+        filename=filename,
+        logfile=outfile,
     )
     biff_dump(bk.mem, bk.base, bk.stream_len, 0, outfile, unnumbered)
 
@@ -210,6 +211,7 @@ def count_records(filename, outfile=sys.stdout):
 
     bk = Book()
     bk.biff2_8_load(
-        filename=filename, logfile=outfile,
+        filename=filename,
+        logfile=outfile,
     )
     biff_count_records(bk.mem, bk.base, bk.stream_len, outfile)

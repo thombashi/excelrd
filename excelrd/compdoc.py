@@ -156,16 +156,27 @@ class CompDoc:
             print("mem data: %d bytes == %d sectors" % (mem_data_len, mem_data_secs), file=logfile)
             print(
                 "SAT_tot_secs=%d, dir_first_sec_sid=%d, min_size_std_stream=%d"
-                % (SAT_tot_secs, self.dir_first_sec_sid, self.min_size_std_stream,),
+                % (
+                    SAT_tot_secs,
+                    self.dir_first_sec_sid,
+                    self.min_size_std_stream,
+                ),
                 file=logfile,
             )
             print(
-                "SSAT_first_sec_sid=%d, SSAT_tot_secs=%d" % (SSAT_first_sec_sid, SSAT_tot_secs,),
+                "SSAT_first_sec_sid=%d, SSAT_tot_secs=%d"
+                % (
+                    SSAT_first_sec_sid,
+                    SSAT_tot_secs,
+                ),
                 file=logfile,
             )
             print(
                 "MSATX_first_sec_sid=%d, MSATX_tot_secs=%d"
-                % (MSATX_first_sec_sid, MSATX_tot_secs,),
+                % (
+                    MSATX_first_sec_sid,
+                    MSATX_tot_secs,
+                ),
                 file=logfile,
             )
         nent = sec_size // 4  # number of SID entries in a sector

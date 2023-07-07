@@ -136,8 +136,8 @@ U_DC = "{http://purl.org/dc/elements/1.1/}"
 U_DCTERMS = "{http://purl.org/dc/terms/}"
 XML_SPACE_ATTR = "{http://www.w3.org/XML/1998/namespace}space"
 XML_WHITESPACE = "\t\n \r"
-X12_MAX_ROWS = 2 ** 20
-X12_MAX_COLS = 2 ** 14
+X12_MAX_ROWS = 2**20
+X12_MAX_COLS = 2**14
 V_TAG = U_SSML12 + "v"  # cell child: value
 F_TAG = U_SSML12 + "f"  # cell child: formula
 IS_TAG = U_SSML12 + "is"  # cell child: inline string
@@ -219,34 +219,146 @@ def cnv_xsd_boolean(s):
 
 
 _defined_name_attribute_map = (
-    ("name", "name", cnv_ST_Xstring,),
-    ("comment", "", cnv_ST_Xstring,),
-    ("customMenu", "", cnv_ST_Xstring,),
-    ("description", "", cnv_ST_Xstring,),
-    ("help", "", cnv_ST_Xstring,),
-    ("statusBar", "", cnv_ST_Xstring,),
-    ("localSheetId", "scope", cnv_xsd_unsignedInt,),
-    ("hidden", "hidden", cnv_xsd_boolean,),
-    ("function", "func", cnv_xsd_boolean,),
-    ("vbProcedure", "vbasic", cnv_xsd_boolean,),
-    ("xlm", "macro", cnv_xsd_boolean,),
-    ("functionGroupId", "funcgroup", cnv_xsd_unsignedInt,),
-    ("shortcutKey", "", cnv_ST_Xstring,),
-    ("publishToServer", "", cnv_xsd_boolean,),
-    ("workbookParameter", "", cnv_xsd_boolean,),
-    ("", "any_err", 0,),
-    ("", "any_external", 0,),
-    ("", "any_rel", 0,),
-    ("", "basic_formula_len", 0,),
-    ("", "binary", 0,),
-    ("", "builtin", 0,),
-    ("", "complex", 0,),
-    ("", "evaluated", 0,),
-    ("", "excel_sheet_index", 0,),
-    ("", "excel_sheet_num", 0,),
-    ("", "option_flags", 0,),
-    ("", "result", None,),
-    ("", "stack", None,),
+    (
+        "name",
+        "name",
+        cnv_ST_Xstring,
+    ),
+    (
+        "comment",
+        "",
+        cnv_ST_Xstring,
+    ),
+    (
+        "customMenu",
+        "",
+        cnv_ST_Xstring,
+    ),
+    (
+        "description",
+        "",
+        cnv_ST_Xstring,
+    ),
+    (
+        "help",
+        "",
+        cnv_ST_Xstring,
+    ),
+    (
+        "statusBar",
+        "",
+        cnv_ST_Xstring,
+    ),
+    (
+        "localSheetId",
+        "scope",
+        cnv_xsd_unsignedInt,
+    ),
+    (
+        "hidden",
+        "hidden",
+        cnv_xsd_boolean,
+    ),
+    (
+        "function",
+        "func",
+        cnv_xsd_boolean,
+    ),
+    (
+        "vbProcedure",
+        "vbasic",
+        cnv_xsd_boolean,
+    ),
+    (
+        "xlm",
+        "macro",
+        cnv_xsd_boolean,
+    ),
+    (
+        "functionGroupId",
+        "funcgroup",
+        cnv_xsd_unsignedInt,
+    ),
+    (
+        "shortcutKey",
+        "",
+        cnv_ST_Xstring,
+    ),
+    (
+        "publishToServer",
+        "",
+        cnv_xsd_boolean,
+    ),
+    (
+        "workbookParameter",
+        "",
+        cnv_xsd_boolean,
+    ),
+    (
+        "",
+        "any_err",
+        0,
+    ),
+    (
+        "",
+        "any_external",
+        0,
+    ),
+    (
+        "",
+        "any_rel",
+        0,
+    ),
+    (
+        "",
+        "basic_formula_len",
+        0,
+    ),
+    (
+        "",
+        "binary",
+        0,
+    ),
+    (
+        "",
+        "builtin",
+        0,
+    ),
+    (
+        "",
+        "complex",
+        0,
+    ),
+    (
+        "",
+        "evaluated",
+        0,
+    ),
+    (
+        "",
+        "excel_sheet_index",
+        0,
+    ),
+    (
+        "",
+        "excel_sheet_num",
+        0,
+    ),
+    (
+        "",
+        "option_flags",
+        0,
+    ),
+    (
+        "",
+        "result",
+        None,
+    ),
+    (
+        "",
+        "stack",
+        None,
+    ),
 )
 
 

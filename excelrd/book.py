@@ -755,7 +755,12 @@ class Book(BaseObject):
         # It appears to work OK if the sheet version is ignored.
         # Confirmed by Daniel Rentz: happens when Excel does "save as"
         # creating an old version file; ignore version details on sheet BOF.
-        sh = sheet.Sheet(self, self._position, self._sheet_names[sh_number], sh_number,)
+        sh = sheet.Sheet(
+            self,
+            self._position,
+            self._sheet_names[sh_number],
+            sh_number,
+        )
         sh.read(self)
         self._sheet_list[sh_number] = sh
         return sh
@@ -824,9 +829,11 @@ class Book(BaseObject):
         self._all_sheets_count += 1
         if sheet_type != XL_BOUNDSHEET_WORKSHEET:
             self._all_sheets_map.append(-1)
-            descr = {1: "Macro sheet", 2: "Chart", 6: "Visual Basic module",}.get(
-                sheet_type, "UNKNOWN"
-            )
+            descr = {
+                1: "Macro sheet",
+                2: "Chart",
+                6: "Visual Basic module",
+            }.get(sheet_type, "UNKNOWN")
 
             if DEBUG or self.verbosity >= 1:
                 fprintf(
@@ -1463,9 +1470,13 @@ class Book(BaseObject):
                     version = 70
             else:
                 # dodgy one, created by a 3rd-party tool
-                version = {0x0000: 21, 0x0007: 21, 0x0200: 21, 0x0300: 30, 0x0400: 40,}.get(
-                    version2, 0
-                )
+                version = {
+                    0x0000: 21,
+                    0x0007: 21,
+                    0x0200: 21,
+                    0x0300: 30,
+                    0x0400: 40,
+                }.get(version2, 0)
         elif version1 in (0x04, 0x02, 0x00):
             version = {0x04: 40, 0x02: 30, 0x00: 21}[version1]
 

@@ -17,7 +17,6 @@ COL_ERR = NCOLS + 10
 
 
 class TestSheet(TestCase):
-
     sheetnames = ["PROFILEDEF", "AXISDEF", "TRAVERSALCHAINAGE", "AXISDATUMLEVELS", "PROFILELEVELS"]
 
     def setUp(self):

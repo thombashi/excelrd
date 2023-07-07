@@ -402,7 +402,11 @@ class Sheet(BaseObject):
             xfx = self.cell_xf_index(rowx, colx)
         else:
             xfx = None
-        return Cell(self._cell_types[rowx][colx], self._cell_values[rowx][colx], xfx,)
+        return Cell(
+            self._cell_types[rowx][colx],
+            self._cell_values[rowx][colx],
+            xfx,
+        )
 
     def cell_value(self, rowx, colx):
         "Value of the cell in the given row and column."
@@ -569,7 +573,10 @@ class Sheet(BaseObject):
     def tidy_dimensions(self):
         if self.verbosity >= 3:
             fprintf(
-                self.logfile, "tidy_dimensions: nrows=%d ncols=%d \n", self.nrows, self.ncols,
+                self.logfile,
+                "tidy_dimensions: nrows=%d ncols=%d \n",
+                self.nrows,
+                self.ncols,
             )
         if 1 and self.merged_cells:
             nr = nc = 0
@@ -641,7 +648,6 @@ class Sheet(BaseObject):
         try:
             nr = rowx + 1
             if self.nrows < nr:
-
                 scta = self._cell_types.append
                 scva = self._cell_values.append
                 scxa = self._cell_xf_indexes.append
@@ -1188,10 +1194,18 @@ class Sheet(BaseObject):
             elif rc == XL_LABELRANGES:
                 pos = 0
                 pos = unpack_cell_range_address_list_update_pos(
-                    self.row_label_ranges, data, pos, bv, addr_size=8,
+                    self.row_label_ranges,
+                    data,
+                    pos,
+                    bv,
+                    addr_size=8,
                 )
                 pos = unpack_cell_range_address_list_update_pos(
-                    self.col_label_ranges, data, pos, bv, addr_size=8,
+                    self.col_label_ranges,
+                    data,
+                    pos,
+                    bv,
+                    addr_size=8,
                 )
                 assert pos == data_len
             elif rc == XL_ARRAY:
@@ -1361,9 +1375,11 @@ class Sheet(BaseObject):
                     ) = unpack("<HHHHxxHH", data[:14])
                 else:
                     assert bv >= 30  # BIFF3-7
-                    (options, self.first_visible_rowx, self.first_visible_colx,) = unpack(
-                        "<HHH", data[:6]
-                    )
+                    (
+                        options,
+                        self.first_visible_rowx,
+                        self.first_visible_colx,
+                    ) = unpack("<HHH", data[:6])
                     self.gridline_colour_rgb = unpack("<BBB", data[6:9])
                     self.gridline_colour_index = nearest_colour_index(
                         self.book.colour_map, self.gridline_colour_rgb, debug=0
@@ -1781,7 +1797,7 @@ class Sheet(BaseObject):
         return xfx
 
     def fake_XF_from_BIFF20_cell_attr(self, cell_attr, style=0):
-        from .formatting import XF, XFAlignment, XFBorder, XFBackground, XFProtection
+        from .formatting import XF, XFAlignment, XFBackground, XFBorder, XFProtection
 
         xf = XF()
         xf.alignment = XFAlignment()
@@ -1798,7 +1814,14 @@ class Sheet(BaseObject):
         (prot_bits, font_and_format, halign_etc) = unpack("<BBB", cell_attr)
         xf.format_key = font_and_format & 0x3F
         xf.font_index = (font_and_format & 0xC0) >> 6
-        upkbits(xf.protection, prot_bits, ((6, 0x40, "cell_locked"), (7, 0x80, "formula_hidden"),))
+        upkbits(
+            xf.protection,
+            prot_bits,
+            (
+                (6, 0x40, "cell_locked"),
+                (7, 0x80, "formula_hidden"),
+            ),
+        )
         xf.alignment.hor_align = halign_etc & 0x07
         for mask, side in ((0x08, "left"), (0x10, "right"), (0x20, "top"), (0x40, "bottom")):
             if halign_etc & mask:

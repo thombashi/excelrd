@@ -34,7 +34,9 @@ setup(
     maintainer_email="tsuyoshi.hombashi@gmail.com",
     url="https://github.com/thombashi/excelrd",
     packages=["excelrd"],
-    scripts=["scripts/runxlrd.py",],
+    scripts=[
+        "scripts/runxlrd.py",
+    ],
     description=(
         "Library for developers to extract data from Microsoft Excel (tm) spreadsheet files"
     ),

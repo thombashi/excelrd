@@ -30,13 +30,13 @@ xfc             Print "XF counts" and cell-type counts -- see code for details
 
 options = None
 if __name__ == "__main__":
-    import excelrd
+    import gc
+    import glob
     import sys
     import time
-    import glob
     import traceback
-    import gc
 
+    import excelrd
     from excelrd.timemachine import REPR
 
     class LogHandler:
