@@ -1,6 +1,20 @@
 PACKAGE := excelrd
 PYTHON := python3
 
+AUTHOR := thombashi
+PACKAGE := pytablewriter
+
+BUILD_WORK_DIR := _work
+
+
+.PHONY: build-remote
+build-remote: clean
+	@mkdir -p $(BUILD_WORK_DIR)
+	@cd $(BUILD_WORK_DIR) && \
+		git clone https://github.com/$(AUTHOR)/$(PACKAGE).git --depth 1 && \
+		cd $(PACKAGE) && \
+		$(PYTHON) -m tox -e build
+	ls -lh $(PKG_BUILD_DIR)/dist/*
 
 .PHONY: build
 build: clean
