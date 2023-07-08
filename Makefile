@@ -38,6 +38,11 @@ docs:
 fmt:
 	tox -e fmt
 
+.PHONY: release
+release:
+	cd $(PKG_BUILD_DIR) && $(PYTHON) setup.py release --verbose --search-dir $(PACKAGE)
+	$(MAKE) clean
+
 .PHONY: setup-ci
 setup-ci:
 	@$(PYTHON) -m pip install -q --disable-pip-version-check --upgrade tox
