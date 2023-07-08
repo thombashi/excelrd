@@ -2,9 +2,10 @@ PACKAGE := excelrd
 PYTHON := python3
 
 AUTHOR := thombashi
-PACKAGE := pytablewriter
+PACKAGE := excelrd
 
 BUILD_WORK_DIR := _work
+PKG_BUILD_DIR := $(BUILD_WORK_DIR)/$(PACKAGE)
 
 
 .PHONY: build-remote
