@@ -15,6 +15,10 @@ check:
 clean:
 	@tox -e clean
 
+.PHONY: docs
+docs:
+	$(PYTHON) -m tox -e docs
+
 .PHONY: fmt
 fmt:
 	tox -e fmt
