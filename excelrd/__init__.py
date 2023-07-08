@@ -7,6 +7,15 @@ import sys
 import zipfile
 
 from . import timemachine
+from .__version__ import (
+    __author__,
+    __copyright__,
+    __email__,
+    __license__,
+    __maintainer__,
+    __maintainer_email__,
+    __version__,
+)
 from .biffh import (
     XL_CELL_BLANK,
     XL_CELL_BOOLEAN,
@@ -21,7 +30,6 @@ from .biffh import (
 )
 from .book import Book, colname
 from .formula import *  # is constrained by __all__
-from .__version__ import __author__, __copyright__, __email__, __license__, __version__, __maintainer__, __maintainer_email__
 from .sheet import empty_cell
 from .xldate import XLDateError, xldate_as_datetime, xldate_as_tuple
 from .xlsx import X12Book
