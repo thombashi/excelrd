@@ -13,7 +13,6 @@ import operator as opr
 from struct import unpack
 
 from .biffh import (
-    BaseObject,
     XLRDError,
     error_text_from_code,
     hex_char_dump,

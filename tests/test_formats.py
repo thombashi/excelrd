@@ -1,6 +1,5 @@
 # Portions Copyright (C) 2010, Manfred Moitzi under a BSD licence
 
-import sys
 from unittest import TestCase
 
 import excelrd

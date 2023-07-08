@@ -7,8 +7,6 @@
 # Currently supported: 2.6 to 2.7, 3.2+
 # usage: from timemachine import *
 
-import sys
-
 
 BYTES_LITERAL = lambda x: x.encode("latin1")
 BYTES_ORD = lambda byte: byte
