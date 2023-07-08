@@ -13,7 +13,8 @@ check:
 
 .PHONY: clean
 clean:
-	@tox -e clean
+	rm -rf docs/_build/
+	$(PYTHON) -e clean
 
 .PHONY: docs
 docs:
