@@ -1,8 +1,7 @@
 import os
+from typing import Dict, Type
 
 import setuptools
-
-from typing import Dict, Type
 
 
 MODULE_NAME = "excelrd"
@@ -10,6 +9,7 @@ REPOSITORY_URL = f"https://github.com/thombashi/{MODULE_NAME:s}"
 REQUIREMENT_DIR = "requirements"
 
 pkg_info: Dict[str, str] = {}
+
 
 def get_release_command_class():
     try:
