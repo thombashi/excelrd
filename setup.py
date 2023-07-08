@@ -52,7 +52,7 @@ setuptools.setup(
     python_requires=">=3.7",
     tests_require=TESTS_REQUIRES,
     extras_require={
-        "dev": ["releasecmd>=0.2.0,<1", "twine", "wheel"] + TESTS_REQUIRES,
+        "dev": ["releasecmd>=0.2.0,<1"] + TESTS_REQUIRES,
         "test": TESTS_REQUIRES,
     },
     classifiers=[
