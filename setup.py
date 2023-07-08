@@ -29,6 +29,9 @@ with open("README.rst") as fp:
 with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
     TESTS_REQUIRES = [line.strip() for line in f if line.strip()]
 
+with open(os.path.join(REQUIREMENT_DIR, "docs_requirements.txt")) as f:
+    docs_requires = [line.strip() for line in f if line.strip()]
+
 setuptools.setup(
     name=MODULE_NAME,
     version=pkg_info["__version__"],
@@ -51,6 +54,7 @@ setuptools.setup(
     python_requires=">=3.7",
     tests_require=TESTS_REQUIRES,
     extras_require={
+        "docs": docs_requires,
         "dev": ["releasecmd>=0.2.0,<1"] + TESTS_REQUIRES,
         "test": TESTS_REQUIRES,
     },
