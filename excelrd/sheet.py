@@ -603,7 +603,7 @@ class Sheet(BaseObject):
                 # we put one empty cell at (nr-1,0) to make sure
                 # we have the right number of rows. The ragged rows
                 # will sort out the rest if needed.
-                self.put_cell(nr - 1, 0, XL_CELL_EMPTY, UNICODE_LITERAL(""), -1)
+                self.put_cell(nr - 1, 0, XL_CELL_EMPTY, "", -1)
         if self.verbosity >= 1 and (self.nrows != self._dimnrows or self.ncols != self._dimncols):
             fprintf(
                 self.logfile,
@@ -632,7 +632,7 @@ class Sheet(BaseObject):
                 rlen = len(trow)
                 nextra = ncols - rlen
                 if nextra > 0:
-                    s_cell_values[rowx][rlen:] = [UNICODE_LITERAL("")] * nextra
+                    s_cell_values[rowx][rlen:] = [""] * nextra
                     trow[rlen:] = self.bt * nextra
                     if s_fmt_info:
                         s_cell_xf_indexes[rowx][rlen:] = self.bf * nextra
@@ -680,11 +680,11 @@ class Sheet(BaseObject):
                 num_empty += 1
                 # self._put_cell_row_widenings += 1
                 # types_row.extend(self.bt * num_empty)
-                # values_row.extend([UNICODE_LITERAL('')] * num_empty)
+                # values_row.extend([''] * num_empty)
                 # if fmt_info:
                 #     fmt_row.extend(self.bf * num_empty)
                 types_row[ltr:] = self.bt * num_empty
-                values_row[ltr:] = [UNICODE_LITERAL("")] * num_empty
+                values_row[ltr:] = [""] * num_empty
                 if fmt_info:
                     fmt_row[ltr:] = self.bf * num_empty
             types_row[colx] = ctype
@@ -738,7 +738,7 @@ class Sheet(BaseObject):
                     trow.extend(self.bt * nextra)
                     if self.formatting_info:
                         self._cell_xf_indexes[rowx].extend(self.bf * nextra)
-                    self._cell_values[rowx].extend([UNICODE_LITERAL("")] * nextra)
+                    self._cell_values[rowx].extend([""] * nextra)
             else:
                 scta = self._cell_types.append
                 scva = self._cell_values.append
@@ -750,7 +750,7 @@ class Sheet(BaseObject):
                 for _unused in range(self.nrows, nr):
                     # self._put_cell_rows_appended += 1
                     scta(bt * nc)
-                    scva([UNICODE_LITERAL("")] * nc)
+                    scva([""] * nc)
                     if fmt_info:
                         scxa(bf * nc)
                 self.nrows = nr
@@ -1663,7 +1663,7 @@ class Sheet(BaseObject):
         if bv < 80:
             enc = bk.encoding or bk.derive_encoding()
         nchars_found = 0
-        result = UNICODE_LITERAL("")
+        result = ""
         while 1:
             if bv >= 80:
                 flag = BYTES_ORD(data[offset]) & 1
@@ -1780,7 +1780,7 @@ class Sheet(BaseObject):
             if xf.format_key:
                 msg = "ERROR *** XF[%d] unknown format key (%d, 0x%04x)\n"
                 fprintf(self.logfile, msg, xf.xf_index, xf.format_key, xf.format_key)
-            fmt = Format(xf.format_key, FUN, UNICODE_LITERAL("General"))
+            fmt = Format(xf.format_key, FUN, "General")
             book.format_map[xf.format_key] = fmt
             book.format_list.append(fmt)
         cellty_from_fmtty = {
@@ -1932,7 +1932,7 @@ class Sheet(BaseObject):
             if clsid == b"\xE0\xC9\xEA\x79\xF9\xBA\xCE\x11\x8C\x82\x00\xAA\x00\x4B\xA9\x0B":
                 #          E0H C9H EAH 79H F9H BAH CEH 11H 8CH 82H 00H AAH 00H 4BH A9H 0BH
                 # URL Moniker
-                h.type = UNICODE_LITERAL("url")
+                h.type = "url"
                 nbytes = unpack("<L", data[offset : offset + 4])[0]
                 offset += 4
                 h.url_or_path = str(data[offset : offset + nbytes], "UTF-16le")
@@ -1962,7 +1962,7 @@ class Sheet(BaseObject):
                 assert extra_nbytes in (24, 0)
             elif clsid == b"\x03\x03\x00\x00\x00\x00\x00\x00\xC0\x00\x00\x00\x00\x00\x00\x46":
                 # file moniker
-                h.type = UNICODE_LITERAL("local file")
+                h.type = "local file"
                 uplevels, nbytes = unpack("<Hi", data[offset : offset + 6])
                 offset += 6
                 shortpath = (
@@ -1993,12 +1993,12 @@ class Sheet(BaseObject):
             else:
                 fprintf(self.logfile, "*** unknown clsid %r\n", clsid)
         elif options & 0x163 == 0x103:  # UNC
-            h.type = UNICODE_LITERAL("unc")
+            h.type = "unc"
             h.url_or_path, offset = get_nul_terminated_unicode(data, offset)
         elif options & 0x16B == 8:
-            h.type = UNICODE_LITERAL("workbook")
+            h.type = "workbook"
         else:
-            h.type = UNICODE_LITERAL("unknown")
+            h.type = "unknown"
 
         if options & 0x8:  # has textmark
             h.textmark, offset = get_nul_terminated_unicode(data, offset)
@@ -2172,7 +2172,7 @@ class Sheet(BaseObject):
             o.show = 0
             o.row_hidden = 0
             o.col_hidden = 0
-            o.author = UNICODE_LITERAL("")
+            o.author = ""
             o._object_id = None
             self.cell_note_map[o.rowx, o.colx] = o
             return
@@ -2216,7 +2216,7 @@ class Sheet(BaseObject):
             ),
         )
         totchars = 0
-        o.text = UNICODE_LITERAL("")
+        o.text = ""
         while totchars < cchText:
             rc2, data2_len, data2 = self.book.get_record_parts()
             assert rc2 == XL_CONTINUE
@@ -2363,7 +2363,7 @@ class Note(BaseObject):
     """
 
     #: Author of note
-    author = UNICODE_LITERAL("")
+    author = ""
 
     #: ``True`` if the containing column is hidden
     col_hidden = 0
@@ -2386,7 +2386,7 @@ class Note(BaseObject):
     show = 0
 
     #: Text of the note
-    text = UNICODE_LITERAL("")
+    text = ""
 
 
 class Hyperlink(BaseObject):
@@ -2565,7 +2565,7 @@ class Cell(BaseObject):
             return f"{ctype_text[self.ctype]}:{self.value!r} (XF:{self.xf_index!r})"
 
 
-empty_cell = Cell(XL_CELL_EMPTY, UNICODE_LITERAL(""))
+empty_cell = Cell(XL_CELL_EMPTY, "")
 
 ##### =============== Colinfo and Rowinfo ============================== #####
 

@@ -11,7 +11,6 @@ import sys
 
 
 BYTES_LITERAL = lambda x: x.encode("latin1")
-UNICODE_LITERAL = lambda x: x
 BYTES_ORD = lambda byte: byte
 
 

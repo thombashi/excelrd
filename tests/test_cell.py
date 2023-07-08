@@ -3,7 +3,6 @@
 import unittest
 
 import excelrd
-from excelrd.timemachine import UNICODE_LITERAL
 
 from .base import from_this_dir
 
@@ -18,14 +17,14 @@ class TestCell(unittest.TestCase):
         cell = sheet.cell(0, 0)
         self.assertEqual(cell.ctype, excelrd.book.XL_CELL_EMPTY)
         self.assertEqual(cell.value, "")
-        self.assertEqual(type(cell.value), type(UNICODE_LITERAL("")))
+        self.assertEqual(type(cell.value), type(""))
         self.assertTrue(cell.xf_index > 0)
 
     def test_string_cell(self):
         cell = self.sheet.cell(0, 0)
         self.assertEqual(cell.ctype, excelrd.book.XL_CELL_TEXT)
         self.assertEqual(cell.value, "PROFIL")
-        self.assertEqual(type(cell.value), type(UNICODE_LITERAL("")))
+        self.assertEqual(type(cell.value), type(""))
         self.assertTrue(cell.xf_index > 0)
 
     def test_number_cell(self):

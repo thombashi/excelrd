@@ -58,8 +58,8 @@ _code_from_builtin_name = {
 builtin_name_from_code = {}
 code_from_builtin_name = {}
 for _bin, _bic in _code_from_builtin_name.items():
-    _bin = UNICODE_LITERAL(_bin)
-    _bic = UNICODE_LITERAL(_bic)
+    _bin = _bin
+    _bic = _bic
     code_from_builtin_name[_bin] = _bic
     builtin_name_from_code[_bic] = _bin
 del _bin, _bic, _code_from_builtin_name
@@ -199,7 +199,7 @@ class Name(BaseObject):
     name_index = 0
 
     # A Unicode string. If builtin, decoded as per OOo docs.
-    name = UNICODE_LITERAL("")
+    name = ""
 
     #: An 8-bit string.
     raw_formula = b""
@@ -361,7 +361,7 @@ class Book(BaseObject):
 
     #: What (if anything) is recorded as the name of the last user to
     #: save the file.
-    user_name = UNICODE_LITERAL("")
+    user_name = ""
 
     #: A list of :class:`~excelrd.formatting.Font` class instances,
     #: each corresponding to a FONT record.
@@ -676,16 +676,14 @@ class Book(BaseObject):
             )
             if USE_FANCY_CD:
                 for qname in ["Workbook", "Book"]:
-                    self.mem, self.base, self.stream_len = cd.locate_named_stream(
-                        UNICODE_LITERAL(qname)
-                    )
+                    self.mem, self.base, self.stream_len = cd.locate_named_stream(qname)
                     if self.mem:
                         break
                 else:
                     raise XLRDError("Can't find workbook in OLE2 compound document")
             else:
                 for qname in ["Workbook", "Book"]:
-                    self.mem = cd.get_named_stream(UNICODE_LITERAL(qname))
+                    self.mem = cd.get_named_stream(qname)
                     if self.mem:
                         break
                 else:
@@ -782,7 +780,7 @@ class Book(BaseObject):
 
     def fake_globals_get_sheet(self):  # for BIFF 4.0 and earlier
         formatting.initialise_book(self)
-        fake_sheet_name = UNICODE_LITERAL("Sheet 1")
+        fake_sheet_name = "Sheet 1"
         self._sheet_names = [fake_sheet_name]
         self._sh_abs_posn = [0]
         self._sheet_visibility = [0]  # one sheet, visible
@@ -1528,7 +1526,7 @@ def expand_cell_address(inrow, incol):
 
 def colname(colx, _A2Z="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
     assert colx >= 0
-    name = UNICODE_LITERAL("")
+    name = ""
     while 1:
         quot, rem = divmod(colx, 26)
         name = _A2Z[rem] + name
@@ -1576,7 +1574,7 @@ def unpack_SST_table(datatab, nstrings):
         if options & 0x04:  # phonetic
             phosz = local_unpack("<i", data[pos : pos + 4])[0]
             pos += 4
-        accstrg = UNICODE_LITERAL("")
+        accstrg = ""
         charsgot = 0
         while 1:
             charsneed = nchars - charsgot

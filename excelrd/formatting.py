@@ -327,7 +327,7 @@ class Font(BaseObject, EqNeAttrs):
     italic = 0
 
     #: The name of the font. Example: ``"Arial"``.
-    name = UNICODE_LITERAL("")
+    name = ""
 
     #: 1 = Characters are struck out.
     struck_out = 0
@@ -370,7 +370,7 @@ def handle_font(book, data):
     k = len(book.font_list)
     if k == 4:
         f = Font()
-        f.name = UNICODE_LITERAL("Dummy Font")
+        f.name = "Dummy Font"
         f.font_index = k
         book.font_list.append(f)
         k += 1
@@ -462,7 +462,7 @@ class Format(BaseObject, EqNeAttrs):
     type = FUN
 
     #: The format string
-    format_str = UNICODE_LITERAL("")
+    format_str = ""
 
     def __init__(self, format_key, ty, format_str):
         self.format_key = format_key
@@ -536,29 +536,29 @@ for lo, hi, ty in fmt_code_ranges:
         std_format_code_types[x] = ty
 del lo, hi, ty, x
 
-date_chars = UNICODE_LITERAL("ymdhs")  # year, month/minute, day, hour, second
+date_chars = "ymdhs"  # year, month/minute, day, hour, second
 date_char_dict = {}
 for _c in date_chars + date_chars.upper():
     date_char_dict[_c] = 5
 del _c, date_chars
 
 skip_char_dict = {}
-for _c in UNICODE_LITERAL("$-+/(): "):
+for _c in "$-+/(): ":
     skip_char_dict[_c] = 1
 
 num_char_dict = {
-    UNICODE_LITERAL("0"): 5,
-    UNICODE_LITERAL("#"): 5,
-    UNICODE_LITERAL("?"): 5,
+    "0": 5,
+    "#": 5,
+    "?": 5,
 }
 
 non_date_formats = {
-    UNICODE_LITERAL("0.00E+00"): 1,
-    UNICODE_LITERAL("##0.0E+0"): 1,
-    UNICODE_LITERAL("General"): 1,
-    UNICODE_LITERAL("GENERAL"): 1,  # OOo Calc 1.1.4 does this.
-    UNICODE_LITERAL("general"): 1,  # pyExcelerator 0.6.3 does this.
-    UNICODE_LITERAL("@"): 1,
+    "0.00E+00": 1,
+    "##0.0E+0": 1,
+    "General": 1,
+    "GENERAL": 1,  # OOo Calc 1.1.4 does this.
+    "general": 1,  # pyExcelerator 0.6.3 does this.
+    "@": 1,
 }
 
 fmt_bracketed_sub = re.compile(r"\[[^]]*\]").sub
@@ -584,16 +584,16 @@ def is_date_format_string(book, fmt):
 
     for c in fmt:
         if state == 0:
-            if c == UNICODE_LITERAL('"'):
+            if c == '"':
                 state = 1
-            elif c in UNICODE_LITERAL(r"\_*"):
+            elif c in r"\_*":
                 state = 2
             elif c in skip_char_dict:
                 pass
             else:
                 s += c
         elif state == 1:
-            if c == UNICODE_LITERAL('"'):
+            if c == '"':
                 state = 0
         elif state == 2:
             # Ignore char after backslash, underscore or asterisk
