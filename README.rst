@@ -49,6 +49,13 @@ if present in the file:
 -  Handling password-protected (encrypted) files.
 
 
+Installation
+============================================
+::
+
+    pip install excelrd
+
+
 Quick start
 ==================
 Print all of the cell values in a specific sheet:
@@ -113,3 +120,8 @@ Acknowledgements
    of timesheet and project accounting solutions (http://journyx.com/).
 -  Provision of formatting information in version 0.6.1 was funded by
    Simplistix Ltd (http://www.simplistix.co.uk/)
+
+
+Documentation
+==================
+https://excelrd.rtfd.io/
