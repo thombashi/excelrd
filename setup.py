@@ -37,7 +37,7 @@ setuptools.setup(
     author_email=pkg_info["__email__"],
     maintainer=pkg_info["__maintainer__"],
     maintainer_email=pkg_info["__maintainer_email__"],
-    url="https://github.com/thombashi/excelrd",
+    url=REPOSITORY_URL,
     packages=["excelrd"],
     scripts=[
         "scripts/runxlrd.py",
