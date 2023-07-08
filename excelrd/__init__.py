@@ -1,12 +1,13 @@
 # Copyright (c) 2005-2012 Stephen John Machin, Lingfo Pty Ltd
 # This module is part of the excelrd package, which is released under a
 # BSD-style licence.
+
+import io
 import os
 import pprint
 import sys
 import zipfile
 
-from . import timemachine
 from .__version__ import (
     __author__,
     __copyright__,
@@ -140,7 +141,7 @@ def open_workbook(
             peek = f.read(peeksz)
     if peek == b"PK\x03\x04":  # a ZIP file
         if file_contents:
-            zf = zipfile.ZipFile(timemachine.BYTES_IO(file_contents))
+            zf = zipfile.ZipFile(io.BytesIO(file_contents))
         else:
             zf = zipfile.ZipFile(filename)
 

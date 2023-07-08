@@ -3,7 +3,7 @@
 # This module is part of the excelrd package, which is released under a BSD-style licence.
 ##
 
-
+import io
 import re
 import sys
 from os.path import join, normpath
@@ -52,7 +52,7 @@ def ensure_elementtree_imported(verbosity, logfile):
                 import xml.etree.ElementTree as ET
 
     if hasattr(ET, "iterparse"):
-        _dummy_stream = BYTES_IO(b"")
+        _dummy_stream = io.BytesIO(b"")
         try:
             ET.iterparse(_dummy_stream)
             ET_has_iterparse = True

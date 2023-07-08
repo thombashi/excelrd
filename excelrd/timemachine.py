@@ -8,7 +8,6 @@
 # usage: from timemachine import *
 
 import sys
-from io import BytesIO as BYTES_IO
 
 
 BYTES_LITERAL = lambda x: x.encode("latin1")
