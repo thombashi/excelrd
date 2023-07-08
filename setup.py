@@ -38,7 +38,7 @@ setuptools.setup(
     maintainer=pkg_info["__maintainer__"],
     maintainer_email=pkg_info["__maintainer_email__"],
     url=REPOSITORY_URL,
-    packages=["excelrd"],
+    packages=setuptools.find_packages(exclude=["test*"]),
     scripts=[
         "scripts/runxlrd.py",
     ],
