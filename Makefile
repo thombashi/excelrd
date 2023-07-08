@@ -9,8 +9,7 @@ build: clean
 
 .PHONY: check
 check:
-	python setup.py check
-	pylama
+	@$(PYTHON) -m tox -e lint
 
 .PHONY: clean
 clean:
