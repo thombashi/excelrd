@@ -4,7 +4,7 @@ Formatting information in Excel Spreadsheets
 Introduction
 ------------
 
-This collection of features, new in xlrd version 0.6.1, is intended
+This collection of features, new in excelrd version 0.6.1, is intended
 to provide the information needed to:
 
 - display/render spreadsheet contents (say) on a screen or in a PDF file
@@ -88,11 +88,11 @@ Default Formatting
 Default formatting is applied to all empty cells (those not described by a cell
 record):
 
-- Firstly, row default information (``ROW`` record, :class:`~xlrd.sheet.Rowinfo`
+- Firstly, row default information (``ROW`` record, :class:`~excelrd.sheet.Rowinfo`
   class) is used if available.
 
 - Failing that, column default information (``COLINFO`` record,
-  :class:`~xlrd.sheet.Colinfo` class) is used if available.
+  :class:`~excelrd.sheet.Colinfo` class) is used if available.
 
 - As a last resort the worksheet/workbook default cell format will be used; this
   should always be present in an Excel file,
@@ -100,7 +100,7 @@ record):
   By default, it uses the worksheet/workbook default cell style,
   described by the very first ``XF`` record (index 0).
 
-Formatting features not included in xlrd
+Formatting features not included in excelrd
 ----------------------------------------
 
 - Asian phonetic text (known as "ruby"), used for Japanese furigana.
@@ -114,7 +114,7 @@ Formatting features not included in xlrd
 
 - Modern Excel file versions don't keep most of the built-in
   "number formats" in the file; Excel loads formats according to the
-  user's locale. Currently, xlrd's emulation of this is limited to
+  user's locale. Currently, excelrd's emulation of this is limited to
   a hard-wired table that applies to the US English locale. This may mean
   that currency symbols, date order, thousands separator, decimals separator,
   etc are inappropriate.

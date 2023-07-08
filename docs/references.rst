@@ -1,7 +1,7 @@
 Named references, constants, formulas, and macros
 =================================================
 
-.. currentmodule:: xlrd.book
+.. currentmodule:: excelrd.book
 
 
 A name is used to refer to a cell, a group of cells, a constant

@@ -1,15 +1,15 @@
 Loading worksheets on demand
 =============================
 
-.. currentmodule:: xlrd.book
+.. currentmodule:: excelrd.book
 
 This feature, new in version 0.7.1, is governed by the ``on_demand`` argument
-to the :func:`~xlrd.open_workbook` function and allows saving memory and time by
+to the :func:`~excelrd.open_workbook` function and allows saving memory and time by
 loading only those sheets that the caller is interested in, and releasing sheets
 when no longer required.
 
 ``on_demand=False`` (default):
-  No change. :func:`~xlrd.open_workbook` loads global data
+  No change. :func:`~excelrd.open_workbook` loads global data
   and all sheets, releases resources no longer required (principally the
   :class:`str` or :class:`mmap.mmap` object containing the Workbook stream),
   and returns.
@@ -19,7 +19,7 @@ when no longer required.
   ``on_demand`` is recorded as ``False``, and the old process is followed.
 
 ``on_demand=True`` and BIFF version >= 5.0:
-  :func:`~xlrd.open_workbook` loads global
+  :func:`~excelrd.open_workbook` loads global
   data and returns without releasing resources. At this stage, the only
   information available about sheets is :attr:`Book.nsheets` and
   :meth:`Book.sheet_names`.

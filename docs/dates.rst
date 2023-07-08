@@ -1,7 +1,7 @@
 Dates in Excel spreadsheets
 ===========================
 
-.. currentmodule:: xlrd.xldate
+.. currentmodule:: excelrd.xldate
 
 In reality, there are no such things. What you have are floating point
 numbers and pious hope.
@@ -36,8 +36,8 @@ There are several problems with Excel dates:
    versa) will work correctly with the host Excel.
 
    When using this package's :func:`xldate_as_tuple` function to convert numbers
-   from a workbook, you must use the :attr:`~xlrd.Book.datemode` attribute of
-   the :class:`~xlrd.Book` object. If you guess, or make a judgement depending
+   from a workbook, you must use the :attr:`~excelrd.Book.datemode` attribute of
+   the :class:`~excelrd.Book` object. If you guess, or make a judgement depending
    on where you believe the workbook was created, you run the risk of being 1462
    days out of kilter.
 
@@ -66,7 +66,7 @@ There are several problems with Excel dates:
    (``15:00:00``), independent of the calendar, or should it be interpreted as
    an instant on a particular day (``1904-01-01T15:00:00``)?
 
-   The functions in :mod:`~xlrd.xldate` take the view that such a number is a
+   The functions in :mod:`~excelrd.xldate` take the view that such a number is a
    calendar-independent time of day (like Python's :class:`datetime.time` type)
    for both date systems. This is consistent with more recent Microsoft
    documentation. For example, the help file for Excel 2002, which says that the
@@ -84,4 +84,4 @@ There are several problems with Excel dates:
    ``3799-12-31``.
 
    For further information, please refer to the documentation for the
-   functions in :mod:`~xlrd.xldate`.
+   functions in :mod:`~excelrd.xldate`.

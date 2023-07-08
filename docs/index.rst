@@ -1,7 +1,7 @@
-xlrd documentation
-==================
+excelrd documentation
+====================================
 
-xlrd is a library for reading data and formatting information from Excel
+excelrd is a library for reading data and formatting information from Excel
 files, whether they are .xls or .xlsx files.
 
 .. toctree::
@@ -25,7 +25,6 @@ development, please see the sections below:
 .. toctree::
    :maxdepth: 1
 
-   installation.rst
    development.rst
    changes.rst
    acknowledgements.rst

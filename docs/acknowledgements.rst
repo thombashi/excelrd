@@ -8,7 +8,7 @@ The latest version is available from OpenOffice.org in
 `PDF format`__ and `ODT format`__.
 Small portions of the OOo docs are reproduced in this
 document. A study of the OOo docs is recommended for those who wish a
-deeper understanding of the Excel file layout than the xlrd docs can provide.
+deeper understanding of the Excel file layout than the excelrd docs can provide.
 
 __ http://sc.openoffice.org/excelfileformat.pdf
 
