@@ -11,7 +11,7 @@ REQUIREMENT_DIR = "requirements"
 pkg_info: Dict[str, str] = {}
 
 
-def get_release_command_class():
+def get_release_command_class() -> Dict[str, Type[setuptools.Command]]:
     try:
         from releasecmd import ReleaseCommand
     except ImportError:
@@ -22,7 +22,6 @@ def get_release_command_class():
 
 with open(os.path.join(MODULE_NAME, "__version__.py")) as f:
     exec(f.read(), pkg_info)
-
 
 with open("README.rst") as fp:
     long_description = fp.read()
