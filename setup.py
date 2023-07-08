@@ -49,7 +49,7 @@ setuptools.setup(
     long_description_content_type="text/x-rst",
     license=pkg_info["__license__"],
     keywords=["xls", "excel", "spreadsheet", "workbook"],
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     tests_require=TESTS_REQUIRES,
     extras_require={
         "dev": ["releasecmd>=0.2.0,<1", "twine", "wheel"] + ["pylama"] + TESTS_REQUIRES,
@@ -61,7 +61,6 @@ setuptools.setup(
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
