@@ -14,9 +14,9 @@
     :target: https://pypi.org/project/excelrd
     :alt: Supported Python implementations
 
-.. image:: https://img.shields.io/travis/thombashi/excelrd/master.svg?label=CI
-    :target: https://travis-ci.org/thombashi/excelrd
-    :alt: Linux/macOS CI status
+.. image:: https://github.com/thombashi/excelrd/actions/workflows/lint_and_test.yml/badge.svg
+    :target: https://github.com/thombashi/excelrd/actions/workflows/lint_and_test.yml
+    :alt: CI status of Linux/macOS/Windows
 
 .. image:: https://coveralls.io/repos/github/thombashi/excelrd/badge.svg?branch=master
     :target: https://coveralls.io/github/thombashi/excelrd?branch=master
@@ -25,7 +25,7 @@
 excelrd
 ==================
 ``excelrd`` is a modified version of `xlrd <http://www.python-excel.org/>`__ to work for the latest Python versions.
-``xlrd`` will not work at Python 3.9 or newer versions.
+``xlrd`` will not work in Python 3.9 or newer versions.
 
 **Purpose**: Provide a library for developers to use to extract data from Microsoft Excel (tm) spreadsheet files. It is not an end-user tool.
 
@@ -79,7 +79,7 @@ Print all of the cell values in a specific sheet:
 
 Transition from xlrd to excelrd
 ------------------------------------
-Just replace the ``import xlrd``:
+Replace the import from ``import xlrd`` to ``import excelrd``:
 
 .. code:: python
 
