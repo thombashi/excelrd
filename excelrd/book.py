@@ -1313,7 +1313,7 @@ class Book(BaseObject):
             self._rich_text_runlist_map = rt_runlist
         if DEBUG:
             t1 = perf_counter()
-            print("SST processing took {:.2f} seconds".format(t1 - t0), file=self.logfile)
+            print(f"SST processing took {t1 - t0:.2f} seconds", file=self.logfile)
 
     def handle_writeaccess(self, data):
         DEBUG = 0

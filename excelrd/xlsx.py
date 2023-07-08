@@ -117,7 +117,7 @@ def cell_name_to_rowx_colx(cell_name, letter_value=_UPPERCASE_1_REL_INDEX, allow
                     assert 0 <= colx < X12_MAX_COLS
                     break
     except KeyError:
-        raise Exception("Unexpected character {!r} in cell name {!r}".format(c, cell_name))
+        raise Exception(f"Unexpected character {c!r} in cell name {cell_name!r}")
     rowx = int(cell_name[charx:]) - 1
     return rowx, colx
 
@@ -371,7 +371,7 @@ def make_name_access_maps(bk):
         name_lcase = nobj.name.lower()
         key = (name_lcase, nobj.scope)
         if key in name_and_scope_map:
-            msg = "Duplicate entry {!r} in name_and_scope_map".format(key)
+            msg = f"Duplicate entry {key!r} in name_and_scope_map"
             if 0:
                 raise XLRDError(msg)
             else:
@@ -812,13 +812,9 @@ class X12Sheet(X12General):
                             assert 0 <= colx < X12_MAX_COLS
                             break
                 except KeyError:
-                    raise Exception(
-                        "Unexpected character {!r} in cell name {!r}".format(c, cell_name)
-                    )
+                    raise Exception(f"Unexpected character {c!r} in cell name {cell_name!r}")
                 if explicit_row_number and cell_name[charx:] != row_number:
-                    raise Exception(
-                        "cell name {!r} but row number is {!r}".format(cell_name, row_number)
-                    )
+                    raise Exception(f"cell name {cell_name!r} but row number is {row_number!r}")
             xf_index = int(cell_elem.get("s", "0"))
             cell_type = cell_elem.get("t", "n")
             tvalue = None

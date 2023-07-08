@@ -198,11 +198,11 @@ def xldate_from_date_tuple(date_tuple, datemode):
         return 0.00
 
     if not (1900 <= year <= 9999):
-        raise XLDateBadTuple("Invalid year: {!r}".format((year, month, day)))
+        raise XLDateBadTuple(f"Invalid year: {(year, month, day)!r}")
     if not (1 <= month <= 12):
-        raise XLDateBadTuple("Invalid month: {!r}".format((year, month, day)))
+        raise XLDateBadTuple(f"Invalid month: {(year, month, day)!r}")
     if day < 1 or (day > _days_in_month[month] and not (day == 29 and month == 2 and _leap(year))):
-        raise XLDateBadTuple("Invalid day: {!r}".format((year, month, day)))
+        raise XLDateBadTuple(f"Invalid day: {(year, month, day)!r}")
 
     Yp = year + 4716
     M = month
@@ -214,9 +214,9 @@ def xldate_from_date_tuple(date_tuple, datemode):
     jdn = (1461 * Yp // 4) + ((979 * Mp + 16) // 32) + day - 1364 - (((Yp + 184) // 100) * 3 // 4)
     xldays = jdn - _JDN_delta[datemode]
     if xldays <= 0:
-        raise XLDateBadTuple("Invalid (year, month, day): {!r}".format((year, month, day)))
+        raise XLDateBadTuple(f"Invalid (year, month, day): {(year, month, day)!r}")
     if xldays < 61 and datemode == 0:
-        raise XLDateAmbiguous("Before 1900-03-01: {!r}".format((year, month, day)))
+        raise XLDateAmbiguous(f"Before 1900-03-01: {(year, month, day)!r}")
     return float(xldays)
 
 
@@ -233,7 +233,7 @@ def xldate_from_time_tuple(time_tuple):
     hour, minute, second = time_tuple
     if 0 <= hour < 24 and 0 <= minute < 60 and 0 <= second < 60:
         return ((second / 60.0 + minute) / 60.0 + hour) / 24.0
-    raise XLDateBadTuple("Invalid (hour, minute, second): {!r}".format((hour, minute, second)))
+    raise XLDateBadTuple(f"Invalid (hour, minute, second): {(hour, minute, second)!r}")
 
 
 def xldate_from_datetime_tuple(datetime_tuple, datemode):

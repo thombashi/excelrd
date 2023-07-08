@@ -2339,7 +2339,7 @@ class Sheet(BaseObject):
         )
 
     def __repr__(self):
-        return "Sheet {:>2}:<{}>".format(self.number, self.name)
+        return f"Sheet {self.number:>2}:<{self.name}>"
 
 
 class MSODrawing(BaseObject):
@@ -2560,9 +2560,9 @@ class Cell(BaseObject):
 
     def __repr__(self):
         if self.xf_index is None:
-            return "{}:{!r}".format(ctype_text[self.ctype], self.value)
+            return f"{ctype_text[self.ctype]}:{self.value!r}"
         else:
-            return "{}:{!r} (XF:{!r})".format(ctype_text[self.ctype], self.value, self.xf_index)
+            return f"{ctype_text[self.ctype]}:{self.value!r} (XF:{self.xf_index!r})"
 
 
 empty_cell = Cell(XL_CELL_EMPTY, UNICODE_LITERAL(""))

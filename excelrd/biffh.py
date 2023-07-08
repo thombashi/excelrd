@@ -51,7 +51,7 @@ class BaseObject:
             if getattr(value, "dump", None) and attr != "book":
                 value.dump(
                     f,
-                    header="{}{} ({} object):".format(pad, attr, value.__class__.__name__),
+                    header=f"{pad}{attr} ({value.__class__.__name__} object):",
                     indent=indent + 4,
                 )
             elif attr not in self._repr_these and (

@@ -94,7 +94,7 @@ if __name__ == "__main__":
                 try:
                     showval = excelrd.xldate_as_tuple(cval, dmode)
                 except excelrd.XLDateError as e:
-                    showval = "{}:{}".format(type(e).__name__, e)
+                    showval = f"{type(e).__name__}:{e}"
                     cty = excelrd.XL_CELL_ERROR
             elif cty == excelrd.XL_CELL_ERROR:
                 showval = excelrd.error_text_from_code.get(
@@ -169,7 +169,7 @@ if __name__ == "__main__":
             )
             for rx in range(rlo, rhi):
                 for cx in range(clo, chi):
-                    print("    {}: {!r}".format(excelrd.cellname(rx, cx), sh.cell_value(rx, cx)))
+                    print(f"    {excelrd.cellname(rx, cx)}: {sh.cell_value(rx, cx)!r}")
 
     def show_labels(bk):
         # bk_header(bk)
@@ -338,7 +338,7 @@ if __name__ == "__main__":
             excelrd.count_records(args[1])
             sys.exit(0)
         if cmd == "version":
-            print("excelrd: {}, from {}".format(xlrd_version, excelrd.__file__))
+            print(f"excelrd: {xlrd_version}, from {excelrd.__file__}")
             print("Python:", sys.version)
             sys.exit(0)
         if options.logfilename:
@@ -378,16 +378,16 @@ if __name__ == "__main__":
                     )
                     t1 = time.time()
                     if not options.suppress_timing:
-                        print("Open took {:.2f} seconds".format(t1 - t0))
+                        print(f"Open took {t1 - t0:.2f} seconds")
                 except excelrd.XLRDError as e:
-                    print("*** Open failed: {}: {}".format(type(e).__name__, e))
+                    print(f"*** Open failed: {type(e).__name__}: {e}")
                     continue
                 except KeyboardInterrupt:
                     print("*** KeyboardInterrupt ***")
                     traceback.print_exc(file=sys.stdout)
                     sys.exit(1)
                 except BaseException as e:
-                    print("*** Open failed: {}: {}".format(type(e).__name__, e))
+                    print(f"*** Open failed: {type(e).__name__}: {e}")
                     traceback.print_exc(file=sys.stdout)
                     continue
                 t0 = time.time()
@@ -424,7 +424,7 @@ if __name__ == "__main__":
                         print("GC post cmd:", fname, "->", n_unreachable, "unreachable objects")
                 if not options.suppress_timing:
                     t1 = time.time()
-                    print("\ncommand took {:.2f} seconds\n".format(t1 - t0))
+                    print(f"\ncommand took {t1 - t0:.2f} seconds\n")
 
         return None
 

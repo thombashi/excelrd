@@ -101,7 +101,7 @@ class CompDoc:
         revision, version = unpack("<HH", mem[24:28])
         if DEBUG:
             print(
-                "\nCompDoc format: version=0x{:04x} revision=0x{:04x}".format(version, revision),
+                f"\nCompDoc format: version=0x{version:04x} revision=0x{revision:04x}",
                 file=logfile,
             )
         self.mem = mem

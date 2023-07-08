@@ -82,7 +82,7 @@ def showable_cell_value(celltype, cellvalue, datemode):
         try:
             showval = excelrd.xldate_as_tuple(cellvalue, datemode)
         except excelrd.XLDateError as e:
-            showval = "{}:{}".format(type(e).__name__, e)
+            showval = f"{type(e).__name__}:{e}"
     elif celltype == excelrd.XL_CELL_ERROR:
         showval = excelrd.error_text_from_code.get(
             cellvalue, "<Unknown error code 0x%02x>" % cellvalue
