@@ -14,7 +14,7 @@ check:
 .PHONY: clean
 clean:
 	rm -rf docs/_build/
-	$(PYTHON) -e clean
+	$(PYTHON) -m tox -e clean
 
 .PHONY: docs
 docs:
