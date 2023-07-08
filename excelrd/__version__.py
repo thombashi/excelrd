@@ -1,5 +1,5 @@
 __author__ = "John Machin"
-__copyright__ = f"Portions copyright © 2005-2009, Stephen John Machin, Lingfo Pty Ltd"
+__copyright__ = "Portions copyright © 2005-2009, Stephen John Machin, Lingfo Pty Ltd"
 __email__ = "sjmachin@lexicon.net"
 __license__ = "BSD"
 __version__ = "2.0.3"
